@@ -1,0 +1,83 @@
+
+<!--for CSV Upload-->
+
+<!-- <div style="display: inline-block;">
+<input type="file"  style="padding-left: 450px; padding-top: 247px;font-size: 19px;" name="csvFile" (change)="selectedFile($event)">
+<div *ngIf="!isValid" style="display: inline-block;padding-right: 40px;" >
+ <button mat-raised-button disabled type="submit" style="width: 155px"  color="accent" (click)="csvUpload()">Upload File</button>
+</div>
+<div *ngIf="isValid" style="display: inline-block;padding-right: 40px;">
+    <button mat-raised-button  type="submit" style="width: 155px"  color="accent" (click)="csvUpload()">Upload File</button>
+   </div>
+   <div  style="display: inline-block;">
+    <button mat-raised-button   style="width: 155px"  color="primary" (click)="csvDownload()">Download File</button>
+   </div>
+</div>
+<div>
+<mat-progress-bar class="mat-progress-bar" *ngIf="isProgress"  mode="indeterminate" color="accent" style="height:30px">{{uploadProgress}}</mat-progress-bar>
+<p *ngIf="isValid" style="color:#008000;padding-left: 550px;padding-top: 50px;" >{{message}}</p> -->
+
+
+
+<!--for image------------------------------------------------------------------------------------------------------------------------->
+
+
+
+<!-- <div style="display: inline-block;">
+    <input type="file"  style="padding-left: 197px; padding-top: 247px;font-size: 19px;" name="csvFile" (change)="selectedImage($event)">
+    <div *ngIf="!isValid" style="display: inline-block;padding-right: 40px;" >
+     <button mat-raised-button disabled type="submit" style="width: 155px"  color="accent" (click)="imageUpload()">Upload File</button>
+    </div>
+    <div *ngIf="isValid" style="display: inline-block;padding-right: 40px;">
+        <button mat-raised-button  type="submit" style="width: 155px"  color="accent" (click)="imageUpload()">Upload File</button>
+       </div>
+       <div  style="display: inline-block;">
+        <button mat-raised-button   style="width: 155px"  color="primary" (click)="downloadImage()">Download File</button>
+       </div>
+    </div>
+    <div>
+    <mat-progress-bar class="mat-progress-bar" *ngIf="isProgress"  mode="indeterminate" color="accent" style="height:30px">{{uploadProgress}}</mat-progress-bar>
+    <p *ngIf="isValid" style="color:#008000;padding-left: 550px;padding-top: 50px;" >{{message}}</p>
+    
+   
+    <img id="ItemPreview" #image src="" style="height: 200px;width: 200px;" /> -->
+
+<!--use mat progress bar to show file successfully uploaded-->
+
+
+
+<h2 style="margin-left: 60px;
+position: absolute;
+top: 124px;">Add Products</h2>
+    <input style="margin-left: 500px;margin-top: 70px;"  type="file" [(ngModel)]="images" (change)="selectedFileforimaage($event)"><br>
+
+  
+  <mat-form-field style="margin-left: 500px;" >
+    <mat-label>name</mat-label>
+    <input matInput [(ngModel)]="imagename">
+  </mat-form-field><br><br>
+  <mat-form-field style="margin-left: 500px;" >
+    <mat-label>price Before Discount</mat-label>
+    <input matInput [(ngModel)]="priceBeforeDiscount">
+    
+  </mat-form-field><br><br>
+  <mat-form-field style="margin-left: 500px;" >
+    <mat-label>price After Discount</mat-label>
+    <input matInput [(ngModel)]="priceAfterDiscount">
+    
+  </mat-form-field><br><br>
+  <mat-form-field  style="margin-left: 500px;">
+    <mat-label>date</mat-label>
+    <input matInput [(ngModel)]="date">
+  </mat-form-field><br><br>
+
+  
+  <button mat-raised-button color="accent" style="margin-left: 500px;" type="button" (click)="addproduct(images,imagename,priceBeforeDiscount,priceAfterDiscount,date)" color="accent">add product</button>
+
+
+  <!--fetch data and display-->
+
+
+  <!--fxFlexFill  *ngFor = "let item of items; let index = index"-->
+  
+  <!-- you can also use this in below line:style="background-image: url('/assets/whatsapp.png');" or class="backgnd"-->

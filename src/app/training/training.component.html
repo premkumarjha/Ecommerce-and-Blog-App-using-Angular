@@ -1,0 +1,113 @@
+<!--adding dialog button  (onClose)="dialogClosed()"-->
+<div >
+    <app-dialogbox ></app-dialogbox>
+</div>
+<div style="padding-left: 123px;padding-right: 123px;padding-top: 37px; ">
+<mat-divider></mat-divider>
+</div>
+<!--just to test ki value display ho raha -->
+<!-- <mat-form-field class="mfield">
+
+  <input matInput *ngFor="let Year of messagefromSibling" [value]="Year">{{Year}}>
+
+</mat-form-field> -->
+
+
+
+<!--start date and End date-->
+
+<!--padding-left: 123px;padding-right: 123px; ye below div ka hai-->
+<div style=" padding-left: 123px;padding-right: 123px;padding-top: 30px;display: inline-block;">
+<p style="font-weight: 500;font-size: 16px;" >Start Date</p>
+<mat-form-field color="accent" appearance="fill" >
+  <mat-label>Datepicker</mat-label>
+  <input matInput [matDatepicker]="dp" (keyup)="applyFilter($event.target.value)" >
+  <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+  <mat-datepicker #dp></mat-datepicker>
+</mat-form-field>
+
+<!-- <span style="padding-left: 511px;font-weight: 500;font-size: 16px;">End Date</span> -->
+
+</div>
+<!-- <div style="padding-left: 123px;padding-right: 123px;padding-top: 30px;"> -->
+<!-- datepicker-->
+<div style="
+float: right;
+padding-right: 167px;
+padding-top: 30px;">
+  <p style="font-weight: 500;font-size: 16px;" >End Date</p>
+  <mat-form-field color="accent" appearance="fill" >
+    <mat-label>Datepicker</mat-label>
+    <input matInput [matDatepicker]="dp1" (keyup)="applyFilter($event.target.value)" >
+    <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+    <mat-datepicker #dp1></mat-datepicker>
+  </mat-form-field>
+</div>
+
+
+
+
+
+<!--data table-->
+<button mat-raised-button color="primary" (click)="ExportTOExcel('data')">Export as Excel</button>
+  <div 
+  #TABLE
+   style=" margin-left: 126px;margin-right: 126px;margin-bottom: 50px" class="mat-elevation-z8" >
+    
+    <mat-form-field class="filter" >
+      <input matInput (keyup)="applyFilter($event.target.value)" autocomplete="off" placeholder="Filter">
+    </mat-form-field>
+ 
+    <table  mat-table #table [dataSource]="dataSource" matSort >
+      
+      <!-- Position Column -->
+      <ng-container matColumnDef="trainingeventname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Training Event Name</th>
+        <td mat-cell *matCellDef="let element"> {{element.trainingeventname}} </td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="trainingcenter">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Training Center</th>
+        <td mat-cell *matCellDef="let element"> {{element.trainingcenter}} </td>
+      </ng-container>
+  
+      <!-- Weight Column -->
+      <ng-container matColumnDef="startdate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</th>
+        <td mat-cell *matCellDef="let element"> {{element.startdate | date:"MMM d,y"}} </td>
+      </ng-container>
+  
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="enddate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>End Date</th>
+        <td mat-cell *matCellDef="let element"> {{element.enddate | date:"MMM d,y"}} </td>
+      </ng-container>
+      <ng-container matColumnDef="groupcode">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Group Code</th>
+        <td mat-cell *matCellDef="let element"> {{element.groupcode}} </td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element"> <i class="fa fa-eye" title= 'List Training Course' (click)="openListTrainingDialog(element)" style="font-size:15px;padding-left: 10px"></i>
+        
+          <i class="fa fa-plus fa-4 " title= 'Add Training Course' (click)= "addCourseDialog(element)" style="font-size :15px;padding-left: 10px"></i>
+          <i class="fa fa-pencil fa-4  " title= 'Edit' (click)= "editCourseDialog(element)" style="font-size:15px;padding-left: 10px"></i>
+          <!--*ngIf="row.isDeleteButtonDisabled === true"-->
+          <i class="fa fa-trash fa-4 " (click)= "deleteCourseDialog(element)" style="font-size:15px;padding-left: 10px"  title="Delete" aria-hidden="true"></i>
+        </td>
+        
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+    <mat-paginator 
+                 [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons (page)="onPageChanged($event)">
+  </mat-paginator>
+  </div>
+  
+
+
+

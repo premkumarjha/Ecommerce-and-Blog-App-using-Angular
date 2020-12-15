@@ -1,0 +1,51 @@
+<h1 style="font-weight: 550;">Course List - {{trainingeventname}} - {{trainingcentername}}<mat-icon style="cursor: pointer;padding-left: 615px;" mat-dialog-close color="accent" align="End">clear</mat-icon></h1>
+
+<div class="mat-elevation-z8" style="width: 1066px;">
+    <table mat-table [dataSource]="dataSource" matSort style="width: 1066px;" >
+  
+      <!-- Position Column -->
+      <ng-container matColumnDef="subject">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Subject</th>
+        <td mat-cell *matCellDef="let element"> {{element.subject}} </td>
+      </ng-container>
+  
+      <!-- Name Column -->
+      <ng-container matColumnDef="trainer">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Trainer</th>
+        <td mat-cell *matCellDef="let element"> {{element.trainer}} </td>
+      </ng-container>
+  
+      <!-- Weight Column -->
+      <ng-container matColumnDef="startdate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</th>
+        <td mat-cell *matCellDef="let element"> {{element.startdate | date:"MMM d,y"}} </td>
+      </ng-container>
+  
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="enddate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>End Date</th>
+        <td mat-cell *matCellDef="let element"> {{element.enddate | date:"MMM d,y"}} </td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Status</th>
+        <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element"> 
+          <i class="fa fa-pencil fa-4  " title= 'Edit' (click)= "editCourseDialog(element)" style="font-size:15px;padding-left: 10px"></i>
+          <!--*ngIf="row.isDeleteButtonDisabled === true"-->
+          <i class="fa fa-trash fa-4 " (click)= "deleteCourseDialog(element)" style="font-size:15px;padding-left: 10px"  title="Delete" aria-hidden="true"></i>
+          <i class="fa fa-user" title= 'List Training Course' (click)="openListTrainingDialog()" style="font-size:15px;padding-left: 10px"></i>
+        </td>
+        
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+    <mat-paginator
+                 [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+  </mat-paginator>
+  </div>

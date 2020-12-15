@@ -1,0 +1,115 @@
+
+<div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayout.md="column" >
+  <div fxFlex="7">
+
+  </div>
+    <div fxFlex="40" fxFlexFill   >
+        
+       <mat-card>
+           <h2>Billing Information</h2>
+        <form  [formGroup]="billinForm" (ngSubmit)="confirmPlaceOrder()" >
+        
+            <mat-form-field style="width: 200px;padding-top: 21px">
+              <mat-label>Enter Your First Name</mat-label>
+              <input matInput autocomplete="off" formControlName="firstname" />
+            
+            </mat-form-field>
+            <mat-form-field style="width: 200px;padding-top: 21px">
+                <mat-label>Enter your Lastname</mat-label>
+                <input matInput autocomplete="off" formControlName="lastname" />
+              
+              </mat-form-field>
+              <mat-form-field style="width: 200px;padding-top: 21px">
+                <mat-label>Enter your Email</mat-label>
+                <input matInput autocomplete="off" formControlName="email" />
+              
+              </mat-form-field>
+              <mat-form-field style="width: 200px;padding-top: 21px">
+                <mat-label>Enter your Mobile</mat-label>
+                <input matInput autocomplete="off" formControlName="mobile" />
+              
+              </mat-form-field>
+              <mat-form-field style="width: 200px;padding-top: 21px">
+                <mat-label>Address1</mat-label>
+                <input matInput autocomplete="off" formControlName="firstaddress" />
+              
+              </mat-form-field>
+              <mat-form-field style="width: 200px;padding-top: 21px">
+                <mat-label>Address2</mat-label>
+                <input matInput autocomplete="off" formControlName="secondaddress" />
+              </mat-form-field>
+              <mat-form-field style="width: 200px;padding-top: 21px">
+                <mat-label>State</mat-label>
+                <input matInput autocomplete="off" formControlName="state" />
+              </mat-form-field>
+              <mat-form-field style="width: 200px;padding-top: 21px">
+                <mat-label>City</mat-label>
+                <input matInput autocomplete="off" formControlName="city" />
+              </mat-form-field>
+              <mat-form-field style="width: 200px;padding-top: 21px">
+                <mat-label>Zip Code</mat-label>
+                <input matInput autocomplete="off" formControlName="zipcode" />
+              </mat-form-field>
+              <mat-form-field style="width: 200px;padding-top: 21px">
+                <mat-label>Payment Mode</mat-label>
+                <mat-select formControlName="paymentmode">
+                    <mat-option value="cod">COD</mat-option>
+                    <mat-option value="upi">UPI</mat-option>
+                  </mat-select>
+              </mat-form-field>
+
+           
+        
+              <div style="display: inline-block;padding-left: 28px;">
+                <!--[disabled]="!loginForm.valid"-->
+              <button mat-raised-button type="submit"  style="width: 180px" color="primary" >Confirm and Place Order</button>
+              </div>
+              <div style="display: inline-block;padding-left: 52px;">
+              <button mat-raised-button type="button" (click)="continueShopping()" style="width: 210px"  color="primary" >continue shopping</button>
+            </div>
+            </form>
+
+       </mat-card>
+    </div>
+    <div fxFlex="5" >
+
+    </div>
+    <div fxFlex="40" fxFlexFill  >
+        <mat-card style="height: 455px">
+           <h2>Order Summary</h2>
+           
+                  <table style="width:100%;position: relative;">
+                      <thead>
+                      <tr class="format">
+                        <th>produt</th>
+                        <th>price</th>
+                        <th>Quantity</th>
+                        <th>Total Price</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor = "let cart of myservice.cartArray;let index = index" class="paddingbottom">
+                        <td>{{cart.imagename}}</td>
+                        <td>{{cart.priceAfterDiscount}}</td>
+                        <td>{{cart.count}}</td>
+                          <td>{{cart.priceAfterDiscount*cart.count}}</td>
+                      </tr>
+                  </tbody>
+                    </table>
+                <strong style="position: absolute;
+                left: 274px;
+                bottom: 120px;color: #6c757d">Total : Rs. {{totalCost}}
+                </strong>   
+                
+                <!-- <button mat-raised-button type="button" (click)="payNow()" style="width: 180px;position: absolute;
+                left: 243px;
+                bottom: 51px;" color="primary" >Pay Now</button>  -->
+                
+                
+              </mat-card>
+            </div>
+            </div>
+            
+            
+
+    

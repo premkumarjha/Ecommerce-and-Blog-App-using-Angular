@@ -1,0 +1,28 @@
+.centerFlex {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+   
+  }
+
+  /* .mat-card {
+    transition: box-shadow 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    display: block;
+    position: relative;
+    padding: 16px;
+    border-radius: 4px;
+    margin-top: 80px;
+    
+    width:400px
+}
+.mat-toolbar-row, .mat-toolbar-single-row {
+  display: flex;
+  box-sizing: border-box;
+  padding: 0 16px;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  white-space: nowrap;
+  padding-left: 144px;
+} */

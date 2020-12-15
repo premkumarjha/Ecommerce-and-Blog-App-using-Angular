@@ -1,0 +1,20 @@
+
+  
+    .material-devider1{
+
+      border-top-color: red;
+      padding-left: 123px;padding-right: 123px;padding-top: 37px
+    }
+
+    .material-devider2{
+
+      border-top-color:red;
+    
+    }
+    
+    .example-spacer {
+      flex: 1 1 auto;
+    }
+    a:hover {
+    color: white;
+    }

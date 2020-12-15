@@ -1,0 +1,119 @@
+<div style="margin-bottom: 50px;" class= "mat-elevation-z8"  >
+  <table mat-table [dataSource]="dataSource" multiTemplateDataRows class= "mat-elevation-z8">
+    <ng-container matColumnDef="trainingevent">
+      <th mat-header-cell *matHeaderCellDef>event</th>
+      <td mat-cell *matCellDef="let element">
+
+        <div *ngIf="expandedElement==element;then content else other_content"></div>
+        <ng-template #content><i style="font-size: 23px; color: hotpink; padding-right: 20px;"
+            class="fa fa-minus-square-o "></i>
+          <span style="color: black;"> {{element.trainingevent}}</span>
+
+        </ng-template>
+
+
+        <ng-template #other_content><i style="font-size: 23px; color: hotpink; padding-right: 20px;"
+            class="fa fa-plus-square-o "></i>
+          <span style="color: black;"> {{element.trainingevent}}</span></ng-template>
+
+
+
+
+
+      </td>
+
+
+    </ng-container>
+    <!-- <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+    </td>
+   
+  </ng-container>
+  <ng-container matColumnDef="weight">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+    </td>
+   
+  </ng-container>
+  <ng-container matColumnDef="symbol">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let element">
+    </td>
+   
+  </ng-container> -->
+
+    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+    <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+        <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+          <!--ye table tag ke class me two class hai ak mat-elevation and ak innerTable, so that ye pata chale kis th or ts pe css lagana-->
+          <table mat-table [dataSource]="expandeddataSource" class="mat-elevation-z8 innerTable">
+
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="firstname">
+              <th mat-header-cell *matHeaderCellDef>First Name</th>
+              <td mat-cell *matCellDef="let element"> {{element.firstname}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="lastname">
+              <th mat-header-cell *matHeaderCellDef>Last Name</th>
+              <td mat-cell *matCellDef="let element"> {{element.lastname}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="email">
+              <th mat-header-cell *matHeaderCellDef>Email</th>
+              <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="dob">
+              <th mat-header-cell *matHeaderCellDef>Date of Birth</th>
+              <td mat-cell *matCellDef="let element"> {{element.dob}} </td>
+            </ng-container>
+              <!-- Status Column -->
+              <ng-container matColumnDef="status">
+                <th mat-header-cell *matHeaderCellDef>Status</th>
+                <td mat-cell *matCellDef="let element"  style="cursor:pointer;">  
+              
+                <div *ngIf="element.status=='APPROVED';then content else other_content"></div>
+                <ng-template #content >
+                 <span style="color: green;">  {{element.status}}</span>
+                  <span class="material-icons"  title="change status" style="color:black" (click)="changeApprovedStatus(element)">
+                    how_to_reg
+                    </span>
+                </ng-template>
+                <ng-template #other_content>
+                  <span style="color: red;">  {{element.status}}</span>
+                  <span class="material-icons"  title="change status" style="color:black" (click)="changeApprovedStatus(element)">
+                    how_to_reg
+                    </span>
+                </ng-template>
+               </td>
+               
+              </ng-container>
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+
+          </table>
+
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-row *matRowDef="let element; columns: tableColumn;" class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element">
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+  </table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons>
+  </mat-paginator>
+</div>

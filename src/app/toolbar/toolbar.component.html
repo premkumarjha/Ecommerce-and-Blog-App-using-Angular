@@ -1,0 +1,82 @@
+
+  <!--if fxLayout row lu to...ui ulter..-->
+<mat-drawer-container class="example-container" color="primary" >
+
+  <mat-drawer #drawer class="example-sidenav" mode="side"  >
+  <h2 style="color: white;">My App</h2>
+  <div style="display: flex;">
+    <mat-icon style="color: white; padding-bottom: 20px;" >file_upload</mat-icon> 
+    <a style="color: white; text-decoration: none;padding-left: 12px" [routerLink]="'/upload'">CSV Upload</a>
+  </div>
+  <div style="display: flex;">
+    <mat-icon style="color: white; padding-bottom: 20px;" >account_balance</mat-icon>
+    <a style="color: white; text-decoration: none;padding-left: 12px" [routerLink]="'/training'">Training</a>
+  </div>
+    <div style="display: flex;" *ngIf="userRole"> 
+      <mat-icon style="color: white; padding-bottom: 20px;" >security</mat-icon>
+      <a style="color: white; text-decoration: none;padding-left: 12px" [routerLink]="'/educatorsecurity'">Educator Security</a>
+    </div>
+  
+  <div style="display: flex;">
+  <mat-icon style="color:white;padding-bottom: 20px;" >people</mat-icon>
+  <a style="color: white; text-decoration: none;padding-left: 12px" [routerLink]="'/educator'">Educator</a><br><br>
+  
+</div>
+<div  style="display: flex;">
+  <mat-icon style="color:white;padding-bottom: 20px;" >person</mat-icon>
+  <a style="color: white; text-decoration: none;padding-left: 12px" [routerLink]="'/admin'">Admin</a><br><br>
+</div>
+  </mat-drawer>
+
+  <mat-drawer-content style="min-height: 752px" >
+    <div >  
+      <!--style="position: fixed;top: 0; left: 0;z-index: 1" to make fixed header-->
+    <mat-toolbar  color="primary"  >
+      <button mat-icon-button class="example-icon" (click)="drawer.toggle()"  aria-label="Example icon-button with menu icon">
+        <mat-icon >menu</mat-icon>
+      </button>
+      <span >My App</span>
+      <span class="example-spacer"></span>
+      <div class="container" >
+        <!-- <input  (keyup)="applyFilter($event)" placeholder="Ex. ium" > -->
+        <div class="searchbox">
+         
+      <input type="text" [(ngModel)]="searchText" (keyup.enter)="search()"  placeholder="Search.." name="search">
+      <button type="submit" (click)="search()"><i class="fa fa-search"></i></button>
+    </div>
+    <div class="badge">
+      <a [routerLink]="'/cart'" style="color: white; text-decoration: none;">
+        
+        <span matBadge="{{badgeCount}}" matBadgeColor="warn" matBadgePosition ="before" style="position: absolute;" matBadgeSize="medium"><img src="assets/cart.png" style="position: relative;
+          top: -22px;
+          right: 23px;"alt="image not found"></span>
+        
+      
+      </a>
+    
+    </div>
+<!--mat-menu-->
+<div>
+ 
+      <button  mat-button [matMenuTriggerFor]="menu"><mat-icon >exit_to_app</mat-icon></button>
+
+      <mat-menu #menu="matMenu" > 
+        <button mat-menu-item (click)="logout()">Logout</button>
+      
+      </mat-menu>
+      </div>
+    </div>
+       
+    
+      
+    </mat-toolbar>
+    <router-outlet>
+
+
+    </router-outlet>
+  </div>
+  </mat-drawer-content>
+</mat-drawer-container>
+
+
+<!--  style="position: fixed;z-index: 999;"-->

@@ -1,0 +1,42 @@
+<div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayout.md="column" >
+
+<div fxFlex="100" fxFlexFill  class="cart" >
+  <mat-card >
+    <h2>cart item</h2>
+      <table style="width:100%;position: relative;">
+          <thead>
+          <tr class="format">
+            <th>produt</th>
+            <th>price</th>
+            <th>Quantity</th>
+            <th>Total Price</th>
+            <th>Remove Product</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor = "let cart of myservice.cartArray;let index = index" class="paddingbottom">
+            <td>{{cart.imagename}}</td>
+            <td>{{cart.priceAfterDiscount}}</td>
+            <td><button type="button" (click)="increment(cart)" style="height: 22px;
+              width: 32px;
+              background-color: blue;">+</button ><input type="text" readonly style="width: 18px" value="{{cart.count}}"><button (click)="decreament(cart)"  type="button" style="height: 22px;
+              width: 32px;
+              background-color: #F52887;">-</button></td>
+              <td>{{cart.priceAfterDiscount*cart.count}}</td>
+              <td><button style=" height:20px;width:148px;" (click)="removefromcart(cart,index)">Remove From Cart</button></td>
+          </tr>
+      </tbody>
+        </table>
+    <strong style="position: absolute;
+    left: 641px;
+    bottom: 120px;color: #6c757d">Total : Rs.{{totalCost}}  </strong>
+
+<button style="position: absolute;
+left: 642px;
+bottom: 46px;
+width: 124px;" mat-raised-button color="primary" (click)="checkout()">Checkout</button>
+  
+  </mat-card>
+</div>
+</div>
+

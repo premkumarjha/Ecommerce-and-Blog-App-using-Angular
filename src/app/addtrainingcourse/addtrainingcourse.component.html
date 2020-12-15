@@ -1,0 +1,58 @@
+<div >
+    <h1 style="font-weight: 550;">Add New Course</h1>
+  <form class="example-form" [formGroup]="addNewCourseform" (ngSubmit)="onSaveAddCourse()" >
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Subject<span style="color:red">*</span></mat-label>
+      <select matNativeControl formControlName="subject">
+        <option label="--select --"></option>
+        <option *ngFor="let selectedSubject of subjectList" [value]="selectedSubject">{{selectedSubject}}</option>
+      </select>
+      <!-- <mat-error
+        class="errorMsg"
+        *ngIf="addnewtrainingform.controls.trainingeventname.errors?.required"
+        >Training Event Name</mat-error>-->
+      
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <mat-label>Trainer<span style="color:red">*</span></mat-label>
+        <select matNativeControl formControlName="trainer">
+          <option label="--select something --"></option>
+          <option *ngFor="let trainingcenter of trainingcenters" [value]="trainingcenter">{{trainingcenter}}</option>
+        </select>
+      </mat-form-field>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Training Center</mat-label>
+        <input matInput placeholder="Enter" formControlName="trainingcenter" [readonly]="true" [value]="data" />
+        <!-- <mat-error
+          class="errorMsg"
+          *ngIf="addnewtrainingform.controls.trainingeventname.errors?.required"
+          >Training Event Name</mat-error>-->
+        {{data}}
+      </mat-form-field>
+ <!-- datepicker-->
+      <mat-form-field color="primary" style="width:280px;">
+        <mat-label>Start Date</mat-label>
+        <input matInput [matDatepicker]="picker1" formControlName="startdate">
+        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+        <mat-datepicker #picker1></mat-datepicker>
+      </mat-form-field>
+     <!--datepicker-->
+      <mat-form-field color="primary"style="width: 273px;" >
+        <mat-label>End Date</mat-label>
+        <input matInput [matDatepicker]="picker2" formControlName="enddate" > 
+        <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2 color="primary"></mat-datepicker>
+      </mat-form-field>
+     
+      <!--save and cancel button-->
+      <mat-dialog-actions align="start">
+        <button mat-raised-button type="submit" [disabled]="!addNewCourseform.valid" color="primary" >Save</button>
+        <button mat-raised-button mat-dialog-close color="accent">Cancel</button>
+      </mat-dialog-actions>
+     
+  </form>
+  
+</div>

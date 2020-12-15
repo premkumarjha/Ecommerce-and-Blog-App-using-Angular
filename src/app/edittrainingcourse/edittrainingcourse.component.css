@@ -1,0 +1,14 @@
+.example-form {
+    width: 577px;
+    height: 300px;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
+  mat-form-field {
+    margin-right: 12px;
+  }
+  .errorMsg{
+    color:#b30000;
+  }

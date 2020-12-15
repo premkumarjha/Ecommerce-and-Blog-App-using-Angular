@@ -1,0 +1,53 @@
+<div fxLayout="row" fxLayout="row wrap" fxLayout.xs="column" fxLayout.sm="column" fxLayout.md="column" style="background-color:#00FFFF;height: 100%;position: relative;">
+<!-- <div fxFlex="20"></div> -->
+
+
+<h2 #h2value class="heading" style="color:black;margin-top: 0px;
+z-index: 1; " value="AC Service Packages">Product List</h2>
+
+
+
+    <div fxFlex="50" *ngFor="let item of myservice.items; let index = index"  >
+        
+        
+        <!--we can use also class="mat-elevation-z4" with mat card tag-->
+            <mat-card class="mat-elevation-z4" >
+                <div style="display: inline-block;">
+                    <img #image src="data:image/png;base64,{{item.img.data}}" alt="Girl in a jacket"
+                        style="position: relative;" width="170px">
+
+                    <div style="display: inline-block;position: absolute;
+                
+                left: 125px;
+                top: 236px;
+                font-weight: 700;font-size: 18px">
+                        <span
+                            style="color: #9b9b9b;text-decoration: line-through;font-size: 22px;font-weight: 400;margin-right: 21px;">
+                            RS.{{item.priceBeforeDiscount}}</span>
+                        <span #cutcostdiv>&#8377; {{item.priceAfterDiscount}}</span>
+
+                    </div>
+                </div>
+                <h2 style="color: black;position: absolute;
+            left: 221px
+        ;font-size: 23px;
+    font-weight: 500;top:26px">{{item.imagename}}</h2>
+
+                <div style="display: inline-block;margin-left: 204px;
+            position: absolute;
+            top: 68px;">
+                    <button class="addcart addcartdanger" type="button" style="margin-top: 43px;"
+                        (click)=addToCart(item,index)><span style="font-size: 22px;
+                padding-right: 12px;">+</span>ADD TO CART</button>
+
+                </div>
+
+            </mat-card>
+
+      
+
+    </div>
+    <!-- <div fxFlex="20" ></div> -->
+</div>
+
+<!-- <app-cart [cartsData]="carts"></app-cart> -->
