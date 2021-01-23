@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LandingpageComponent } from './landingpage/landingpage.component';
 import { TrainingComponent } from './training/training.component';
-import { EducatorsecurityComponent } from './educatorsecurity/educatorsecurity.component';
+import { EducatorsecurityComponent } from './abcsecurity/educatorsecurity.component';
 import { CsvuploaddownloadComponent } from './csvuploaddownload/csvuploaddownload.component';
 import { AppComponent } from './app.component';
 import { LoginlogoutComponent } from './loginlogout/loginlogout.component';
@@ -18,6 +18,9 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { StripeComponent } from './stripe/stripe.component';
 import { SuccessComponent } from './success/success.component';
 import { FailureComponent } from './failure/failure.component';
+import { PassportloginComponent } from './passportlogin/passportlogin.component';
+import { NgrxComponent } from './ngrx/ngrx.component';
+import { PracticeComponent } from './practice/practice.component';
 const routes: Routes = [
   
    { 
@@ -57,8 +60,12 @@ const routes: Routes = [
  {path: 'success' , component: SuccessComponent},
 
  {path: 'failure' , component: FailureComponent},
+
+ {path: 'passportlogin' , component: PassportloginComponent},
  
- 
+ {path: 'ngrx' , component: NgrxComponent},
+
+ {path: 'practice' , component: PracticeComponent},
  { 
   path: '', 
   redirectTo: 'productlist', 

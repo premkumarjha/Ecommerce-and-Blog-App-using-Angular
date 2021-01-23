@@ -2,6 +2,7 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Subject, Observable } from 'rxjs';
 import { Token } from '@angular/compiler/src/ml_parser/lexer';
+import { take } from 'rxjs/operators';
 
 
 
@@ -341,5 +342,22 @@ console.log("ram")
 
 //
   return this.http.post(url,body,httpOptions);
+}
+
+passportRegister(url,body){
+
+  return this.http.post(url, body, { headers: this.headers });
+
+}
+passportLogin(url,body){
+
+  return this.http.post(url, body, { headers: this.headers });
+
+}
+
+fetch() {
+  return this.http.get("https://jsonplaceholder.typicode.com/todos");
+  //value.subscribe(d)
+  
 }
 }

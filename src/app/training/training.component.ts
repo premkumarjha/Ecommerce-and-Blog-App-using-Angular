@@ -178,7 +178,7 @@ dialogRef.afterClosed().subscribe(data=>{
 
     })
   }
-
+  
 }
 
 // export interface PeriodicElement {

@@ -1,0 +1,35 @@
+<mat-form-field >
+    <mat-label>Input</mat-label>
+    <input matInput type="text" [(ngModel)]="inputData">
+    <p *ngIf='errorMessage' style="color: brown;">{{message}}</p>
+  </mat-form-field>
+  <button mat-raised-button color="accent" (click)="submit()">Add</button>
+  
+  <table class="table table-hover" *ngIf="displayProduct != 0" >
+    <thead>
+    <tr>
+        <td>Product Name</td>
+       
+    </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let product of displayProduct; let i = index; " >
+            <div style="display: inline" >
+            <!-- <mat-card *ngIf="product.name !== '' " >{{product.name}}
+            </mat-card> -->
+            <td *ngIf='!edit'>{{product.name}}{{"--"}}{{i}}</td>
+            <td *ngIf='edit'><mat-form-field ><input matInput type="text"  [value]="product.name" ></mat-form-field></td>
+            <div >
+              <button style="margin-bottom: 20px;" mat-raised-button color="accent" (click)="delete(product.name)">delete data</button>
+            </div>
+            <div >
+              <button  mat-raised-button color="accent" (click)="editdata()">edit data</button>
+              <button  mat-raised-button color="accent" (click)="updatedata(inputedittedData,i)">save</button>
+            </div>
+            
+          </div>
+            
+            <!-- <td></td> -->
+        </tr>
+    </tbody>
+    </table>

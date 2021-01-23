@@ -12,7 +12,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { TrainingComponent } from './training/training.component';
 import { EducatorComponent } from './educator/educator.component';
 import { LandingpageComponent } from './landingpage/landingpage.component';
-import { EducatorsecurityComponent } from './educatorsecurity/educatorsecurity.component';
+import { EducatorsecurityComponent } from './abcsecurity/educatorsecurity.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatDividerModule} from '@angular/material/divider';
@@ -25,7 +25,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import { MatNativeDateModule, NativeDateModule } from '@angular/material/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS, } from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
@@ -58,9 +58,21 @@ import { FailureComponent } from './failure/failure.component';
 //import {MatSelectModule} from '@angular/material/select';
 //import { FormsModule } from '@angular/forms';
 import { AuthModule } from '@auth0/auth0-angular';
+import { PassportloginComponent } from './passportlogin/passportlogin.component';
+import { SquarePipe } from './square.pipe';
+import { PracticeDirective } from './practice.directive';
+//import { TokenInterceptor } from'../app/token.interceptor'
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { NgrxComponent } from './ngrx/ngrx.component';
+import { PracticeComponent } from './practice/practice.component';
+import { StoreModule } from '@ngrx/store';
+import { addProductReducer } from './reducers/addproduct.reducer';
+
+
 @NgModule({
   declarations: [
     AppComponent,
+    
     ToolbarComponent,
     FooterComponent,
     NavbarComponent,
@@ -88,7 +100,12 @@ import { AuthModule } from '@auth0/auth0-angular';
     ProductlistComponent,
     AdminpageComponent,
     SuccessComponent,
-    FailureComponent
+    FailureComponent,
+    PassportloginComponent,
+    SquarePipe,
+    PracticeDirective,
+    NgrxComponent,
+    PracticeComponent
   ],
   imports: [
     BrowserModule,
@@ -123,19 +140,24 @@ import { AuthModule } from '@auth0/auth0-angular';
      FormsModule,
      MatBadgeModule,
      //AuthModule,
+     MatSnackBarModule,
      
      AuthModule.forRoot({
       domain: 'dev-zh9gbzcl.us.auth0.com',
       clientId: 'ithPwaU9sxlZeBJ14jOud4ot34OjMoxZ'
     }),
-  
+   StoreModule.forRoot({product: addProductReducer}),
+   StoreModule,
   ],
   
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA,
     NO_ERRORS_SCHEMA
   ],
-  providers: [],
+  // providers: [{provide: HTTP_INTERCEPTORS,
+  //   useClass: TokenInterceptor,
+  //   multi: true,
+  // }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
