@@ -9,7 +9,8 @@ const initialState: Product = {
    
 }
 
-export function addProductReducer(state:Product[]=[initialState], action:ProductActions.Actions) {
+
+export function addProductReducer(state:Product[]=[initialState], action:ProductActions.DatatActions) {
     
   switch (action.type) {
     case ProductActions.ADD_PRODUCT:{
@@ -22,7 +23,14 @@ export function addProductReducer(state:Product[]=[initialState], action:Product
             const duplicateResult= state.filter(result=>result.name !==action.payload.name);
             return [...duplicateResult];
         }
+        case ProductActions.GET_PRODUCT:{
+            console.log(state);
+            console.log(action)
+            console.log("effect payload:",action.payload)
+            return [...state,action.payload];
+        }
     default:
         return state;
     }
 }
+

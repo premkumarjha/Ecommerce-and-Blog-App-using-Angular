@@ -10,7 +10,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import { FooterComponent } from './footer/footer.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { TrainingComponent } from './training/training.component';
-import { EducatorComponent } from './educator/educator.component';
+import { EducatorComponent } from './abceducator/educator.component';
 import { LandingpageComponent } from './landingpage/landingpage.component';
 import { EducatorsecurityComponent } from './abcsecurity/educatorsecurity.component';
 import {MatIconModule} from '@angular/material/icon';
@@ -67,6 +67,14 @@ import { NgrxComponent } from './ngrx/ngrx.component';
 import { PracticeComponent } from './practice/practice.component';
 import { StoreModule } from '@ngrx/store';
 import { addProductReducer } from './reducers/addproduct.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { ProductEffects } from './effects/product.effects';
+
+import { BlogpageComponent } from './authorsignup/blogpage.component';
+import { BlogComponent } from './blog/blog.component';
+import { BlogAuthorComponent } from './addblog/blog-author.component';
+import { BlogLoginComponent } from './blog-author-login/blog-login.component';
+import { AuthorComponent } from './author/author.component';
 
 
 @NgModule({
@@ -105,7 +113,13 @@ import { addProductReducer } from './reducers/addproduct.reducer';
     SquarePipe,
     PracticeDirective,
     NgrxComponent,
-    PracticeComponent
+    PracticeComponent,
+    
+    BlogpageComponent,
+    BlogComponent,
+    BlogAuthorComponent,
+    BlogLoginComponent,
+    AuthorComponent
   ],
   imports: [
     BrowserModule,
@@ -147,6 +161,7 @@ import { addProductReducer } from './reducers/addproduct.reducer';
       clientId: 'ithPwaU9sxlZeBJ14jOud4ot34OjMoxZ'
     }),
    StoreModule.forRoot({product: addProductReducer}),
+   EffectsModule.forRoot([ ProductEffects ]),
    StoreModule,
   ],
   

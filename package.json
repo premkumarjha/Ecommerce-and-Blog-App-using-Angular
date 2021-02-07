@@ -31,6 +31,7 @@
     "material-design-icons": "^3.0.1",
     "moment": "^2.27.0",
     "rxjs": "~6.5.5",
+    "rxjs-compat": "^6.6.3",
     "stripe": "^8.106.0",
     "tslib": "^2.0.1",
     "xlsx": "^0.16.9",

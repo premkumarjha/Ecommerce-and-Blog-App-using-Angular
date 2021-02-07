@@ -26,7 +26,11 @@
         <mat-form-field  style="width: 400px;padding-top: 21px">
           <mat-label>Enter your Email</mat-label>
           <input matInput autocomplete="off" formControlName="email" />
-        
+          <mat-error
+       
+        *ngIf="loginForm.controls.email.errors?.required"
+        >email is required</mat-error
+      >
         </mat-form-field>
         <br>
         <mat-form-field  style="width: 400px;">
@@ -35,6 +39,11 @@
           <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button><br>
+          <mat-error
+       
+          *ngIf="loginForm.controls.password.errors?.required"
+          >password is required</mat-error
+        >
         </mat-form-field>
         <br>
         <a style="color: blue;padding-left: 277px" [routerLink]="'/reset'">Forgot Password?</a><br>
@@ -46,7 +55,7 @@
           <br>
           <div style="display: inline-block;padding-right: 10px;">
             <!--[disabled]="!loginForm.valid"-->
-          <button mat-raised-button type="submit"  style="width: 180px" color="primary" >login</button>
+          <button mat-raised-button type="submit"  style="width: 180px" color="primary" [disabled]="!loginForm.valid" >login</button>
           </div>
           <div style="display: inline-block;">
           <button mat-raised-button type="button" (click)="signup()" style="width: 210px"  color="primary" >signup</button>

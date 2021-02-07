@@ -1,0 +1,43 @@
+
+<mat-toolbar color="primary" >
+  <span style="padding-left: 227px;">My Blog</span>
+    <div class="container" >
+      
+      <button mat-raised-button color="accent" *ngIf="loginsignup" (click)="authorLogin()">LOGIN</button>
+      <button mat-raised-button color="accent" *ngIf="loginsignup" (click)="authorSignup()">SIGN UP</button>
+      <button mat-raised-button color="accent" (click)="addpost()">Add Post</button> 
+      
+      <button mat-button [matMenuTriggerFor]="menu" >
+          <mat-icon>exit_to_app</mat-icon>
+      </button>
+    
+      <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="logout()">Logout</button>
+    
+      </mat-menu>
+    </div>
+  
+</mat-toolbar>
+<div *ngFor = "let blog of blogData;let index = index">
+<mat-card class="example-card">
+    <mat-card-header>
+        <!-- <div mat-card-avatar class="example-header-image"></div> -->
+        <img mat-card-avatar src="/assets/cart.png" alt="Avatar">
+        <mat-card-title>{{blog.title}}</mat-card-title>
+        <mat-card-subtitle>{{blog.name}} <span style="padding-left: 21px">{{blog.published | date:fullDate}}</span> </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          {{blog.contents}}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="like(blog)"><i class="far fa-thumbs-up"></i></button>
+        <span>{{blog.likes}}</span>
+        <button mat-button (click)="dislike(blog)"><i class="far fa-thumbs-down"></i></button>
+        <span>{{blog.dislike}}</span>
+      </mat-card-actions>
+
+</mat-card>
+
+</div>

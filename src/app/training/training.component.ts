@@ -5,7 +5,7 @@ import { MatSort } from '@angular/material/sort';
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MyserviceService } from "../myservice.service"
-import { Subscription } from 'rxjs';
+import { Subscription, throwError } from 'rxjs';
 import { ListtrainingcourseComponent } from '../listtrainingcourse/listtrainingcourse.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AddtrainingcourseComponent } from '../addtrainingcourse/addtrainingcourse.component';
@@ -49,7 +49,7 @@ export class TrainingComponent implements OnInit {
   //subscription: Subscription;
   //messagefromSibling:any= [];
   //result="ram";
-  
+  defgh:boolean;;
   displayedColumns: string[] = ['trainingeventname', 'trainingcenter', 'startdate', 'enddate', 'groupcode', 'actions'];
   dataSource = new MatTableDataSource<any>();
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
@@ -57,10 +57,12 @@ export class TrainingComponent implements OnInit {
   @ViewChild(MatTable, { static: false }) table: MatTable<any>;
   @ViewChild('TABLE', { static: false }) TABLE: ElementRef; 
 
-
+  edit:boolean=false;
+idforinlineedit:any=0;
   tableData: any = [];
   result: any;
-
+abc:any;
+  products:any=[];
   constructor(private myservice: MyserviceService, public dialog: MatDialog,) {}
 
 
@@ -179,6 +181,34 @@ dialogRef.afterClosed().subscribe(data=>{
     })
   }
   
+  inlineEditCourseDialog(element,index){
+this.edit=true;
+this.defgh=true;
+console.log(element,index);
+this.edit=true;
+
+this.idforinlineedit=index;
+  }
+  
+  inlineSaveCourseDialog(element){
+
+ this.edit=false;
+
+    //console.log(this.defgh)
+    this.idforinlineedit=element._id;
+  
+    const url = "http://localhost:3000/update/";
+    //console.log(url + this._id);
+    this.myservice.editData(url + element._id, element).subscribe(data => {
+      this.edit=false;
+
+      this.getData()
+    },
+      error => {
+        alert("some erros are present");
+        return throwError(error);
+      })
+  }
 }
 
 // export interface PeriodicElement {

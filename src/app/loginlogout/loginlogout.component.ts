@@ -8,6 +8,9 @@ import { DOCUMENT } from '@angular/common';
 import { MatSelectChange } from '@angular/material/select';
 import { take } from 'rxjs/operators';
 import { pipe } from 'rxjs';
+import { startWith } from 'rxjs-compat/operator/startWith';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 
 
 @Component({
@@ -18,6 +21,8 @@ import { pipe } from 'rxjs';
 
 
 export class LoginlogoutComponent implements OnInit {
+
+  errorMessage:Boolean=false;
 
   isPresssed: Boolean;
 
@@ -46,17 +51,18 @@ export class LoginlogoutComponent implements OnInit {
     { name: 'Spain', cities: ['Barcelona', 'a', 'b'] },
     { name: 'USA', cities: ['Downers', 'Grove'] },
     { name: 'Mexico', cities: ['Puebla'] },
-    { name: 'China', cities: ['Beijing'] },
   ];
+
   cities: Array<any>;
   arraydata: any;
   changeCountry(count) {
-    console.log(count.value.name)
+    console.log(count.value.name);
+   
+    
     //if use find below single find wala line enough to show city
-    this.cities = this.countryList.find(con => con.name == count.value.name).cities;
-
-
-    console.log(this.cities)
+    //this.cities = this.countryList.find(con => con.name == count.value.name).cities;
+this.cities=this.countryList.find(data=>data.name == count.value.name).cities;
+    
 
 
     //if use filter then below 5 line of code is useful to display city
@@ -67,7 +73,11 @@ export class LoginlogoutComponent implements OnInit {
     //    //arraydata will be aray of city
     //    this.arraydata=element.cities;
   }
-  constructor(@Inject(DOCUMENT) public document: Document,private fb: FormBuilder, private myservice: MyserviceService, public dialog: MatDialog, private router: Router, public auth: AuthService) { }
+  constructor(@Inject(DOCUMENT) public document: Document,private fb: FormBuilder, private myservice: MyserviceService, public dialog: MatDialog, private router: Router, public auth: AuthService,private _snackBar: MatSnackBar) { 
+
+
+    
+  }
   
 
 
@@ -79,7 +89,7 @@ export class LoginlogoutComponent implements OnInit {
   ngOnInit(): void {
 
     this.loginForm = this.fb.group({
-      email: ['', Validators.email],
+      email: ['', Validators.required],
       password: ['', Validators.required],
     });
 
@@ -88,6 +98,7 @@ export class LoginlogoutComponent implements OnInit {
     //console.log(canvasval);
     //this.drawcircle(200,200);
   }
+  get f() { return this.loginForm.controls; }
 
   login() {
 
@@ -96,15 +107,28 @@ export class LoginlogoutComponent implements OnInit {
     const url = "http://localhost:3000/login"
     this.myservice.login(url, this.loginForm.value).subscribe(data => {
       console.log(data)
-      console.log(data[0].message);
-      // if(data[0].message=="Auth successful"){
-
-      //   this.router.navigate(['/training']);
-      // }
+     console.log(data['message']);
+       if(data['message']=="user not found"){
+        this._snackBar.open(data['message'], 'close', {
+          //duration: 2000,
+        });
+         //this.router.navigate(['/training']);
+       }
       localStorage.setItem('token', data[0].token);
       this.router.navigate(['/training']);
       // this.loginForm.reset();
-    })
+    },
+    error=>{
+
+this._snackBar.open(error.message, 'close', {
+  //duration: 2000,
+});
+      console.log(error.message);
+    }
+    
+    
+    
+    )
   }
 
   signup() {

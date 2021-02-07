@@ -11,10 +11,11 @@ export class ToolbarComponent implements OnInit {
   searchText:any;
    userRole=false;
 badgeCount:any=0;
-  constructor(private router: Router,private myservice: MyserviceService) {
+  constructor(private router: Router,public myservice: MyserviceService) {
     this.myservice.getRole().subscribe(data=>{
       this.userRole=data;
    })
+  
   }
 
   ngOnInit(): void {

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Product } from '../model/data.model';
 import { AppState } from '../app.state';
 import * as ProductActions from '../actions/product.action'
+import * as fromreducer from '../reducers/addproduct.reducer'
 @Component({
   selector: 'app-ngrx',
   templateUrl: './ngrx.component.html',
@@ -11,6 +12,7 @@ import * as ProductActions from '../actions/product.action'
 })
 export class NgrxComponent implements OnInit {
   
+  apiGetData$: Observable<boolean>;
   products: Observable<Product[]>;
 displayProduct:any;
 errorMessage:boolean=false;
@@ -18,7 +20,13 @@ errorMessage:boolean=false;
   inputData:any;
   message:string="please give some input";
   edit:boolean=false;
-  constructor(private store: Store<AppState>) { }
+  articles$: Observable<any[]>
+  
+
+  constructor(private store: Store<AppState>) { 
+
+    //this.articles$ = store.select(fromreducer.addProductReducer);
+  }
 
   ngOnInit(): void {
     //console.log(this.product)
@@ -31,6 +39,9 @@ errorMessage:boolean=false;
       this.displayProduct=data;
       this.inputData="";
     })
+
+    //this.apiGetData$ = this.store.pipe(select(selectIsAuthenticated));
+    
   }
 
   submit(){
@@ -50,6 +61,7 @@ console.log(value);
 this.store.dispatch(new ProductActions.RemoveProduct({name: value}) )
 
   }
+  
   editdata(value,i){
 this.edit=true;
 value=this.inputData;
@@ -63,5 +75,9 @@ console.log(value, i)
 value=this.inputData;
 console.log(i)
   }
-  
+
+  // getp(){
+  //   this.store.dispatch(new ProductActions.GetProduct({data:[]}))
+
+  // }
 }

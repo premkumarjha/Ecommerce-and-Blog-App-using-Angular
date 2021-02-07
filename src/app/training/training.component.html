@@ -61,41 +61,104 @@ padding-top: 30px;">
     <table  mat-table #table [dataSource]="dataSource" matSort >
       
       <!-- Position Column -->
+      
       <ng-container matColumnDef="trainingeventname">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Training Event Name</th>
-        <td mat-cell *matCellDef="let element"> {{element.trainingeventname}} </td>
+        
+        <td mat-cell *matCellDef="let user;let i=index">
+          <ng-container  *ngIf="edit==false">
+            <p class="text-truncate">{{user.trainingeventname }} </p>
+          </ng-container>
+          <ng-container  *ngIf="edit">
+            <mat-form-field >
+              <input matInput  [(ngModel)]="user.trainingeventname">
+            </mat-form-field>
+          </ng-container>
+        </td>
+
+        <!-- <td mat-cell *matCellDef="let element"> {{element.trainingeventname}} </td> -->
+    
       </ng-container>
-  
+    
+      
       <!-- Name Column -->
       <ng-container matColumnDef="trainingcenter">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Training Center</th>
-        <td mat-cell *matCellDef="let element"> {{element.trainingcenter}} </td>
+        <!-- <td mat-cell *matCellDef="let element"> {{element.trainingcenter}} </td> -->
+
+        <td mat-cell *matCellDef="let user">
+          <ng-container *ngIf="edit==false" >
+            <p>{{user.trainingcenter }} </p>
+          </ng-container>
+          <ng-container  *ngIf="edit==true" >
+            <mat-form-field >
+              <input matInput   [(ngModel)]="user.trainingcenter">
+            </mat-form-field>
+          </ng-container>
+        </td>
       </ng-container>
   
       <!-- Weight Column -->
       <ng-container matColumnDef="startdate">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Start Date</th>
-        <td mat-cell *matCellDef="let element"> {{element.startdate | date:"MMM d,y"}} </td>
+        <!-- <td mat-cell *matCellDef="let element"> {{element.startdate | date:"MMM d,y"}} </td> -->
+        <td mat-cell *matCellDef="let user">
+          <ng-container *ngIf="edit==false" >
+            <p class="text-truncate">{{user.startdate | date:"MMM d,y"}} </p>
+          </ng-container>
+          <ng-container *ngIf="edit" >
+            <mat-form-field >
+              <input matInput  [(ngModel)]="user.startdate">
+            </mat-form-field>
+          </ng-container>
+        </td>
       </ng-container>
   
       <!-- Symbol Column -->
       <ng-container matColumnDef="enddate">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>End Date</th>
-        <td mat-cell *matCellDef="let element"> {{element.enddate | date:"MMM d,y"}} </td>
+        <!-- <td mat-cell *matCellDef="let element"> {{element.enddate | date:"MMM d,y"}} </td> -->
+
+        <td mat-cell *matCellDef="let user">
+          <ng-container  *ngIf="edit==false">
+            <p class="text-truncate">{{user.enddate | date:"MMM d,y"}} </p>
+          </ng-container>
+          <ng-container *ngIf="edit" >
+            <mat-form-field >
+              <input matInput  [(ngModel)]="user.enddate ">
+            </mat-form-field>
+          </ng-container>
+        </td>
       </ng-container>
+
       <ng-container matColumnDef="groupcode">
         <th mat-header-cell *matHeaderCellDef mat-sort-header>Group Code</th>
-        <td mat-cell *matCellDef="let element"> {{element.groupcode}} </td>
+        <!-- <td mat-cell *matCellDef="let element"> {{element.groupcode}} </td> -->
+        <td mat-cell *matCellDef="let user;let i=index">
+          <!--just below line to show data before  click on inline edit button-->
+          <ng-container  *ngIf="edit==false">
+            <p class="text-truncate">{{user.groupcode}} </p>
+          </ng-container>
+          <!--just below line to show and edit data after  click on inline edit button-->
+          <ng-container  *ngIf="edit">
+            <mat-form-field >
+              <input matInput   [(ngModel)]="user.groupcode">
+            </mat-form-field>
+          </ng-container>
+        </td>
+        
       </ng-container>
+
       <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef>Actions</th>
-        <td mat-cell *matCellDef="let element"> <i class="fa fa-eye" title= 'List Training Course' (click)="openListTrainingDialog(element)" style="font-size:15px;padding-left: 10px"></i>
+        <td mat-cell *matCellDef="let element;let i=index"><i class="fa fa-eye" title= 'List Training Course' (click)="openListTrainingDialog(element)" style="font-size:15px;padding-left: 10px"></i>
         
           <i class="fa fa-plus fa-4 " title= 'Add Training Course' (click)= "addCourseDialog(element)" style="font-size :15px;padding-left: 10px"></i>
           <i class="fa fa-pencil fa-4  " title= 'Edit' (click)= "editCourseDialog(element)" style="font-size:15px;padding-left: 10px"></i>
           <!--*ngIf="row.isDeleteButtonDisabled === true"-->
           <i class="fa fa-trash fa-4 " (click)= "deleteCourseDialog(element)" style="font-size:15px;padding-left: 10px"  title="Delete" aria-hidden="true"></i>
-          
+          <button style="padding-left: 10px" mat-raised-button color="accent" (click)= "inlineEditCourseDialog(element,i)">Edit</button>
+          <button style="padding-left: 10px" mat-raised-button color="accent" (click)= "inlineSaveCourseDialog(element)"  [disabled]="!edit">Update</button>
         </td>
         
       </ng-container>

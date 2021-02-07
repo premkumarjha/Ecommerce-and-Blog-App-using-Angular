@@ -1,0 +1,90 @@
+<mat-toolbar color="primary">
+    <span style="padding-left: 227px;">My Blog</span>
+
+    <div class="container">
+
+        <button mat-raised-button color="accent" (click)="addpost()">Add Post</button>
+
+        <button mat-button [matMenuTriggerFor]="menu">
+            <mat-icon>exit_to_app</mat-icon>
+        </button>
+
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)="logout()">Logout</button>
+
+        </mat-menu>
+    </div>
+</mat-toolbar>
+
+<div *ngFor="let blog of blogData;let index = index">
+    
+    <mat-card class="example-card">
+        <div class="container">
+            <i class="fa fa-edit" (click)="editpost(blog)"></i>
+            <i class="fa fa-trash" (click)="deletepost(blog)"></i>
+        </div>
+        <mat-card-header>
+            <!-- <div mat-card-avatar class="example-header-image"></div> -->
+            <img mat-card-avatar src="/assets/cart.png" alt="Avatar">
+            <mat-card-title>
+                <ng-container *ngIf="edit==false">
+                    <p>{{blog.title}}</p>
+                </ng-container>
+                <ng-container  *ngIf="edit==true" >
+                    <mat-form-field >
+                      <input matInput   [(ngModel)]="blog.title">
+                    </mat-form-field>
+                  </ng-container>
+            </mat-card-title>
+
+            <mat-card-subtitle >
+                <ng-container *ngIf="edit==false">
+                {{blog.name}} 
+                <span style="padding-left: 21px">
+                    {{blog.published | date:fullDate}}
+                </span>
+            </ng-container>
+                <ng-container  *ngIf="edit==true" >
+                    <mat-form-field >
+                      <input matInput   [(ngModel)]="blog.name">
+                    </mat-form-field>
+                  </ng-container>
+                  <ng-container  *ngIf="edit==true" >
+
+                    <mat-form-field >
+                        <input matInput [matDatepicker]="picker" [(ngModel)]="blog.published">
+                        <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+                        <mat-datepicker #picker ></mat-datepicker>
+                      </mat-form-field>
+
+                    <!-- <mat-form-field >
+                      <input matInput   [(ngModel)]="blog.published">
+                    </mat-form-field> -->
+                  </ng-container>
+            </mat-card-subtitle>
+
+          
+        </mat-card-header>
+
+        <mat-card-content>
+            <ng-container *ngIf="edit==false">
+                <p>{{blog.contents}}</p>
+            </ng-container>
+            <ng-container  *ngIf="edit==true" >
+                <mat-form-field >
+                    <textarea matInput [(ngModel)]="blog.contents" ></textarea>
+                </mat-form-field>
+              </ng-container>
+              
+        </mat-card-content>
+       
+        <mat-card-actions>
+            <button mat-button (click)="like(blog)"><i class="far fa-thumbs-up"></i></button>
+            <span>{{blog.likes}}</span>
+            <button mat-button (click)="dislike(blog)"><i class="far fa-thumbs-down"></i></button>
+            <span>{{blog.dislike}}</span>
+            <span style="padding-left: 107px;"><button mat-raised-button  *ngIf="edit==true" (click)="updatepost(blog)" color="accent">update</button></span>
+        </mat-card-actions>
+
+    </mat-card>
+</div>

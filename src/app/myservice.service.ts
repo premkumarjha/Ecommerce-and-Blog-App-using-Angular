@@ -1,8 +1,8 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { HttpHeaders, HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Subject, Observable } from 'rxjs';
+import { Subject, Observable, of, throwError } from 'rxjs';
 import { Token } from '@angular/compiler/src/ml_parser/lexer';
-import { take } from 'rxjs/operators';
+import { catchError, take } from 'rxjs/operators';
 
 
 
@@ -11,7 +11,10 @@ import { take } from 'rxjs/operators';
 })
 export class MyserviceService {
 
+  isSignup:Boolean=false;
+authorData:any=[];
 
+displayToolbar:Boolean=false;
    cartArray:any[]=[];
 items:any=[];
 filteredDataArray:any;
@@ -126,7 +129,17 @@ filteredDataArray:any;
 
   navchange: EventEmitter<any> = new EventEmitter();
 
+  authorcontent=new Subject<any>();
 
+//to update latest data in data table
+sendauthorcontent(message:any) {
+  this.authorcontent.next(message);
+}
+
+//to update latest data in data table
+getauthorcontent(): Observable<any>  {
+  return this.authorcontent.asObservable();;
+}
 
   sendMessage(message: any) {
     this.result.next(message);
@@ -248,9 +261,33 @@ filteredDataArray:any;
   }
 
   login(url,body){
-    return this.http.post(url, body, { headers: this.headers });
+    return this.http.post(url, body, { headers: this.headers })
+    .pipe(
+      //retry(1),
+      catchError(this.handleError)
+    );
 
   }
+  handleError(err) {
+    
+    // client-side error
+    if (err instanceof ErrorEvent) {
+
+      console.log(err);
+      
+      return throwError(err)
+    } else {
+      // server-side error
+      
+      console.log(err);
+      return throwError(err);
+    
+    }
+   // window.alert(errorMessage);
+    //return throwError(errorMessage);
+  }
+
+  
   adminLogin(url,body){
     return this.http.post(url, body, { headers: this.headers });
 
@@ -354,10 +391,45 @@ passportLogin(url,body){
   return this.http.post(url, body, { headers: this.headers });
 
 }
-
-fetch() {
-  return this.http.get("https://jsonplaceholder.typicode.com/todos");
+  dataproduct=[
+{name:"abcderf"}
+,{name:"abcderf"},
+{name:"abcderf"},
+{name:"abcderf"}
+ ]
+getNgrxData() {
+  return of(this.dataproduct);
   //value.subscribe(d)
   
+}
+
+bloggerlogin(url,body){
+  return this.http.post(url, body, { headers: this.headers })
+  
+}
+bloggerSignup(url,body){
+  return this.http.post(url, body, { headers: this.headers })
+  
+}
+eachAuthorData(url){
+  return this.http.get(url);
+
+}
+addBlog(url,body){
+  return this.http.post(url, body, { headers: this.headers })
+  
+}
+
+getBlog(url){
+  return this.http.get(url);
+}
+blogLikes(url,body){
+  return this.http.put(url, body, { headers: this.headers });
+}
+deletepost(url){
+  return this.http.delete(url);
+}
+editauthorpost(url,body){
+  return this.http.put(url, body, { headers: this.headers });
 }
 }

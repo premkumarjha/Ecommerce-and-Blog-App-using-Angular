@@ -1,6 +1,6 @@
 
   <!--if fxLayout row lu to...ui ulter..-->
-<mat-drawer-container class="example-container" color="primary" >
+<mat-drawer-container class="example-container" color="primary"  >
 
   <mat-drawer #drawer class="example-sidenav" mode="side"  >
   <h2 style="color: white;">My App</h2>
@@ -31,7 +31,7 @@
   <mat-drawer-content style="min-height: 752px" >
     <div >  
       <!--style="position: fixed;top: 0; left: 0;z-index: 1" to make fixed header-->
-    <mat-toolbar  color="primary"  >
+    <mat-toolbar  color="primary" *ngIf="myservice.displayToolbar" >
       <button mat-icon-button class="example-icon" (click)="drawer.toggle()"  aria-label="Example icon-button with menu icon">
         <mat-icon >menu</mat-icon>
       </button>

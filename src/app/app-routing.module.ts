@@ -21,6 +21,12 @@ import { FailureComponent } from './failure/failure.component';
 import { PassportloginComponent } from './passportlogin/passportlogin.component';
 import { NgrxComponent } from './ngrx/ngrx.component';
 import { PracticeComponent } from './practice/practice.component';
+import { BlogComponent } from './blog/blog.component';
+//import { AuthorComponent } from './author/author.component';
+import { BlogAuthorComponent } from './addblog/blog-author.component';
+import { BlogLoginComponent } from './blog-author-login/blog-login.component';
+import { BlogpageComponent } from './authorsignup/blogpage.component';
+import { AuthorComponent } from './author/author.component';
 const routes: Routes = [
   
    { 
@@ -71,6 +77,16 @@ const routes: Routes = [
   redirectTo: 'productlist', 
   pathMatch: 'full'
  },
+ {path: 'blog' , component: BlogComponent},
+
+ {path: 'postblog' , component: BlogAuthorComponent},
+
+ {path: 'authorlogin' , component: BlogLoginComponent},
+ 
+ {path: 'authorsignup' , component: BlogpageComponent},
+
+ {path: 'author/:id' , component: AuthorComponent},
+
 
 ];
 
