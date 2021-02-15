@@ -20,6 +20,7 @@ export class BlogLoginComponent implements OnInit {
   hide = true;
   postdata:any=[];
   authorid: string;
+ 
   
   constructor(@Inject(DOCUMENT) public document: Document, private fb: FormBuilder, private myservice: MyserviceService, public dialog: MatDialog, private router: Router, public auth: AuthService, private _snackBar: MatSnackBar,private activatedRoute: ActivatedRoute) { }
 
@@ -35,20 +36,29 @@ export class BlogLoginComponent implements OnInit {
 
     console.log(this.loginBlogForm.value)
     //alert(" login");
-    const url = "http://localhost:3000/course/authorlogin";
-    //const url1="http://localhost:3000/course/getauthor/"
+    const url = "http://localhost:3000/course/authorlogin"
+
+   // const url1="http://localhost:3000/course/getauthor/"
     this.myservice.bloggerlogin(url, this.loginBlogForm.value).subscribe(data => {
+      //console.log(data['user'][0]['author']);
       console.log(data);
+      console.log(data['message'])
       if(data['message']=="invalid password"){
         this._snackBar.open(data['message'], 'close', {
           //duration: 2000,
         });
-      }
+      }else if(data['message']=="user not found"){
+        this._snackBar.open(data['message'], 'close', {
+          //duration: 2000,
+        });
+      }else{
       console.log(data['user'][0]['_id']);
-      localStorage.setItem("authorid",data['user'][0]['_id'])
+      localStorage.setItem("authorid",data['user'][0]['_id']);
+      localStorage.setItem("name",data['user'][0]['author'])
       this.myservice.sendauthorcontent(data['user'][0]['_id']);
       //
      this.router.navigate(['/author',data['user'][0]['_id']]);
+      }
     },
       error => {
         console.log(error.message);
@@ -57,6 +67,7 @@ export class BlogLoginComponent implements OnInit {
         });
       }
     )
+
   }
 
   addpost(){

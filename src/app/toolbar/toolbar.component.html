@@ -1,5 +1,6 @@
 
   <!--if fxLayout row lu to...ui ulter..-->
+  
 <mat-drawer-container class="example-container" color="primary"  >
 
   <mat-drawer #drawer class="example-sidenav" mode="side"  >
@@ -30,15 +31,15 @@
 
   <mat-drawer-content style="min-height: 752px" >
     <div >  
-      <!--style="position: fixed;top: 0; left: 0;z-index: 1" to make fixed header-->
-    <mat-toolbar  color="primary" *ngIf="myservice.displayToolbar" >
+     
+    <mat-toolbar  color="primary"  >
       <button mat-icon-button class="example-icon" (click)="drawer.toggle()"  aria-label="Example icon-button with menu icon">
         <mat-icon >menu</mat-icon>
       </button>
       <span >My App</span>
       <span class="example-spacer"></span>
       <div class="container" >
-        <!-- <input  (keyup)="applyFilter($event)" placeholder="Ex. ium" > -->
+        
         <div class="searchbox">
          
       <input type="text" [(ngModel)]="searchText" (keyup.enter)="search()"  placeholder="Search.." name="search">
@@ -55,7 +56,7 @@
       </a>
     
     </div>
-<!--mat-menu-->
+
 <div>
  
       <button  mat-button [matMenuTriggerFor]="menu"><mat-icon >exit_to_app</mat-icon></button>
@@ -79,4 +80,4 @@
 </mat-drawer-container>
 
 
-<!--  style="position: fixed;z-index: 999;"-->
+ 

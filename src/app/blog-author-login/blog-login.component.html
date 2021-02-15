@@ -1,51 +1,57 @@
-<mat-toolbar color="primary" >
-  <span style="padding-left: 227px;">My Blog</span>
-    <div class="container" >
-      
-      <button mat-raised-button color="accent" (click)="authorLogin()">LOGIN</button>
-      <button mat-raised-button color="accent"  (click)="authorSignup()">SIGN UP</button>
-      <button mat-raised-button color="accent" (click)="addpost()">Add Post</button> 
-      
-      <button mat-button [matMenuTriggerFor]="menu" >
-          <mat-icon>exit_to_app</mat-icon>
+<!-- <span style="padding-left: 227px;">My Blog</span> -->
+<div class="flex-container " fxLayout="row">
+  <mat-toolbar color="primary">
+    <div class="child-1 containerblogtext" fxFlex>Blog App</div>
+    <div class="child-2" fxFlex></div>
+    <div class="child-3 container" fxFlex><button mat-raised-button color="accent" (click)="authorLogin()">SIGN
+        IN</button>
+      <button mat-raised-button color="accent" (click)="authorSignup()">SIGN UP</button>
+      <button mat-raised-button color="accent" (click)="addpost()">Add Post</button>
+      <button mat-button [matMenuTriggerFor]="menu">
+        <mat-icon>exit_to_app</mat-icon>
       </button>
-    
+
       <mat-menu #menu="matMenu">
-          <button mat-menu-item (click)="logout()">Logout</button>
-    
+        <button mat-menu-item (click)="logout()">Logout</button>
+
       </mat-menu>
     </div>
-  
-</mat-toolbar>
+  </mat-toolbar>
+</div>
+
+
+
+
+<!-- <div class="flex-container " fxLayout="row">
+  <div class="child-1" fxFlex>1. One</div> 
+  <div class="child-2 containerblogtext" fxFlex>2. Two</div> 
+  <div class="child-3 container" fxFlex><button mat-raised-button color="accent" (click)="authorLogin()">SIGN IN</button>
+    <button mat-raised-button color="accent"  (click)="authorSignup()">SIGN UP</button>
+    <button mat-raised-button color="accent" (click)="addpost()">Add Post</button> </div>
+</div> -->
+
 <div class="centerFlex">
-    <mat-card >
-    <mat-toolbar  color="accent">
-        <span style="padding-left: 116px;">Author Login</span>
-      </mat-toolbar>
-      <mat-card-content>
-      <form  [formGroup]="loginBlogForm" (ngSubmit)="bloggerlogin()" >
-        
-        <mat-form-field  style="width: 400px;padding-top: 21px">
+  <mat-card>
+    <mat-toolbar color="accent">
+      <span style="padding-left: 116px;">Author Login</span>
+    </mat-toolbar>
+    <mat-card-content>
+      <form [formGroup]="loginBlogForm" (ngSubmit)="bloggerlogin()">
+
+        <mat-form-field style="width: 400px;padding-top: 21px">
           <mat-label>Enter your author</mat-label>
           <input matInput autocomplete="off" formControlName="author" />
-          <mat-error
-       
-        *ngIf="loginBlogForm.controls.author.errors?.required"
-        >Author Name is required</mat-error
-      >
+          <mat-error *ngIf="loginBlogForm.controls.author.errors?.required">Author Name is required</mat-error>
         </mat-form-field>
         <br>
-        <mat-form-field  style="width: 400px;">
+        <mat-form-field style="width: 400px;">
           <mat-label>Enter your password</mat-label>
           <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-          <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
           </button><br>
-          <mat-error
-       
-          *ngIf="loginBlogForm.controls.password.errors?.required"
-          >password is required</mat-error
-        >
+          <mat-error *ngIf="loginBlogForm.controls.password.errors?.required">password is required</mat-error>
         </mat-form-field>
         <br>
         <!-- <a style="color: blue;padding-left: 277px" [routerLink]="'/reset'">Forgot Password?</a><br> -->
@@ -55,15 +61,16 @@
             <input matInput type="password" autocomplete="off" formControlName="password" />
           
           </mat-form-field> -->
-          <br>
-          <div style="display: inline-block;padding-right: 10px;">
-            <!--[disabled]="!loginForm.valid"-->
-          <button mat-raised-button type="submit"  style="width: 180px" color="primary" [disabled]="!loginBlogForm.valid" >login</button>
-          </div>
-          <div style="display: inline-block;">
+        <br>
+        <div style="display: inline-block;padding-right: 10px;">
+          <!--[disabled]="!loginForm.valid"-->
+          <button mat-raised-button type="submit" style="width: 180px" color="primary"
+            [disabled]="!loginBlogForm.valid">login</button>
+        </div>
+        <div style="display: inline-block;">
           <!-- <button mat-raised-button type="button" (click)="signup()" style="width: 210px"  color="primary" >signup</button> -->
         </div>
-        </form>
+      </form>
     </mat-card-content>
-    </mat-card>
+  </mat-card>
 </div>

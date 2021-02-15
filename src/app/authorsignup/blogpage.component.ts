@@ -20,7 +20,9 @@ export class BlogpageComponent implements OnInit {
   signupBlogForm: FormGroup;
   hide = true;
   authorid: string;
-  constructor(@Inject(DOCUMENT) public document: Document, private fb: FormBuilder, public myservice: MyserviceService, public dialog: MatDialog, private router: Router, public auth: AuthService, private _snackBar: MatSnackBar) { }
+  constructor(@Inject(DOCUMENT) public document: Document, private fb: FormBuilder, public myservice: MyserviceService, public dialog: MatDialog, private router: Router, public auth: AuthService, private _snackBar: MatSnackBar) { 
+    myservice.displayToolbar=true;
+  }
 
   ngOnInit(): void {
     this.signupBlogForm = this.fb.group({

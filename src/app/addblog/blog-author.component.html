@@ -1,21 +1,42 @@
+<div class="flex-container " fxLayout="row">
+  <mat-toolbar color="primary">
+    <div class="containerblogtext" fxFlex>Blog App</div>
+    <div fxFlex></div>
+    <div class=" container" fxFlex>
+
+      <button mat-button [matMenuTriggerFor]="menu">
+        <span style="padding-right: 10px;font-size: 21px;">{{authername}}</span> <mat-icon>exit_to_app</mat-icon>
+      </button>
+
+      <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="logout()">Logout</button>
+
+      </mat-menu>
+    </div>
+  </mat-toolbar>
+</div>
+
 <div class="centerFlex">
     <mat-card >
     <mat-toolbar  color="accent">
         <span style="padding-left: 116px;">Add Blog</span>
       </mat-toolbar>
       <mat-card-content>
-      <form  [formGroup]="addBlogForm" (ngSubmit)="postBlog()" >
+      <!-- <form  [formGroup]="addBlogForm" (ngSubmit)="postBlog()" > -->
+
+        <input  style="padding-top:30px" type="file"  [(ngModel)]="images"  (change)="selectedFileforimaage($event)"><br>
         
         <mat-form-field  style="width: 400px;padding-top: 21px">
           <mat-label>Enter Author Name</mat-label>
-          <input matInput autocomplete="off" formControlName="author" />
-          <mat-error
+          <input matInput autocomplete="off" [(ngModel)]="name" />
+          <!-- <mat-error
        
-        *ngIf="addBlogForm.controls.author.errors?.required"
+        *ngIf="addBlogForm.controls.name.errors?.required"
         >author Name is required</mat-error
-      >
+      > -->
         </mat-form-field>
         <br>
+        
 
         <!-- <mat-form-field  style="width: 400px;padding-top: 21px">
             <mat-label>Upload image</mat-label>
@@ -29,35 +50,35 @@
           <br> -->
           <mat-form-field color="primary" style="width:390px;">
             <mat-label>Published Date</mat-label>
-            <input matInput [matDatepicker]="picker1" formControlName="published">
+            <input matInput [matDatepicker]="picker1" [(ngModel)]="published">
             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
             <mat-datepicker #picker1></mat-datepicker>
-            <mat-error
+            <!-- <mat-error
          
           *ngIf="addBlogForm.controls.published.errors?.required"
           >Published Date is required</mat-error
-        >
+        > -->
           </mat-form-field>
           <br>
 
           <mat-form-field  style="width: 400px;padding-top: 21px">
             <mat-label>Enter Title</mat-label>
-            <input matInput autocomplete="off" formControlName="title" />
-            <mat-error
+            <input matInput autocomplete="off" [(ngModel)]="title" />
+            <!-- <mat-error
          
           *ngIf="addBlogForm.controls.title.errors?.required"
           >Title is required</mat-error
-        >
+        > -->
           </mat-form-field>
           <br>
           <mat-form-field  style="width: 400px;padding-top: 21px">
             <mat-label>Enter Contents</mat-label>
-            <textarea matInput autocomplete="off" formControlName="contents"></textarea>
-            <mat-error
+            <textarea matInput autocomplete="off" [(ngModel)]="contents"></textarea>
+            <!-- <mat-error
          
           *ngIf="addBlogForm.controls.contents.errors?.required"
           >Content is required</mat-error
-        >
+        > -->
           </mat-form-field>
         <br>
         <!-- <a style="color: blue;padding-left: 277px" [routerLink]="'/reset'">Forgot Password?</a><br> -->
@@ -70,12 +91,12 @@
           <br>
           <div style="display: inline-block;padding-right: 10px;">
             <!--[disabled]="!loginForm.valid"-->
-          <button mat-raised-button type="submit"  style="width: 180px" color="primary" [disabled]="!addBlogForm.valid" >Post Blog</button>
+          <button mat-raised-button type="button"  style="width: 180px" color="primary" (click)="postBlog(images,name,published,title,contents)"  >Post Blog</button>
           </div>
           <!-- <div style="display: inline-block;">
           <button mat-raised-button type="button" (click)="signup()" style="width: 210px" [disabled]="true" color="primary" >signup</button>
         </div> -->
-        </form>
+        <!-- </form> -->
     </mat-card-content>
     </mat-card>
 </div>

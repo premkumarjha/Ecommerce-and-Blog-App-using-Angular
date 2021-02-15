@@ -1,4 +1,4 @@
-import { SquarePipe } from './square.pipe';
+import { SquarePipe } from './custom.pipe';
 
 describe('SquarePipe', () => {
   it('create an instance', () => {

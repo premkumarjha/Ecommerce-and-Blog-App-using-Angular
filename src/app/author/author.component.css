@@ -6,6 +6,7 @@
     margin-top: 36px;
     /* padding-top: 54px; */
     margin-bottom: 24px;
+    
 }
 
 .example-header-image {
@@ -28,3 +29,22 @@
   .example-card .container i{
     padding-right: 10px;
   }
+
+  .likecolor:active {
+
+    color:blue;
+    
+  }
+  .containerblogtext{
+    display: flex;
+    /* //flex-direction: column; */
+    justify-content: center;
+    margin: auto;
+    margin-right: 30px;
+  }
+
+  .mat-toolbar.mat-primary {
+    background: #3f51b5;
+    color: #fff;
+    height: 83px;
+}

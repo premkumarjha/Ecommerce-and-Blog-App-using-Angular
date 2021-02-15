@@ -1,14 +1,35 @@
+<div class="flex-container " fxLayout="row">
+  <mat-toolbar color="primary">
+    <div class="containerblogtext" fxFlex>Blog App</div>
+    <div fxFlex></div>
+    <div class=" container" fxFlex><button mat-raised-button color="accent" *ngIf="loginsignup"
+        (click)="authorLogin()">SIGN IN</button>
+      <button mat-raised-button color="accent" *ngIf="loginsignup" (click)="authorSignup()">SIGN UP</button>
+      <button mat-raised-button color="accent" (click)="addpost()">Add Post</button>
 
-<mat-toolbar color="primary" >
+      <button mat-button [matMenuTriggerFor]="menu">
+        <span style="padding-right: 10px;font-size: 21px;">{{name}}</span>
+        <mat-icon>exit_to_app</mat-icon>
+      </button>
+
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="logout()">Logout</button>
+
+      </mat-menu>
+    </div>
+  </mat-toolbar>
+</div>
+<!--Below code is without using flex layout-->
+<!-- <mat-toolbar color="primary" >
   <span style="padding-left: 227px;">My Blog</span>
     <div class="container" >
       
-      <button mat-raised-button color="accent" *ngIf="loginsignup" (click)="authorLogin()">LOGIN</button>
+      <button mat-raised-button color="accent" *ngIf="loginsignup" (click)="authorLogin()">SIGN IN</button>
       <button mat-raised-button color="accent" *ngIf="loginsignup" (click)="authorSignup()">SIGN UP</button>
       <button mat-raised-button color="accent" (click)="addpost()">Add Post</button> 
       
       <button mat-button [matMenuTriggerFor]="menu" >
-          <mat-icon>exit_to_app</mat-icon>
+        <span style="padding-right: 10px;font-size: 21px;">{{name}}</span><mat-icon>exit_to_app</mat-icon>
       </button>
     
       <mat-menu #menu="matMenu">
@@ -17,27 +38,114 @@
       </mat-menu>
     </div>
   
-</mat-toolbar>
-<div *ngFor = "let blog of blogData;let index = index">
-<mat-card class="example-card">
-    <mat-card-header>
-        <!-- <div mat-card-avatar class="example-header-image"></div> -->
-        <img mat-card-avatar src="/assets/cart.png" alt="Avatar">
-        <mat-card-title>{{blog.title}}</mat-card-title>
-        <mat-card-subtitle>{{blog.name}} <span style="padding-left: 21px">{{blog.published | date:fullDate}}</span> </mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-content>
-        <p>
-          {{blog.contents}}
-        </p>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-button (click)="like(blog)"><i class="far fa-thumbs-up"></i></button>
-        <span>{{blog.likes}}</span>
-        <button mat-button (click)="dislike(blog)"><i class="far fa-thumbs-down"></i></button>
-        <span>{{blog.dislike}}</span>
-      </mat-card-actions>
+</mat-toolbar> -->
 
-</mat-card>
+
+<div *ngFor="let blog of blogData;let index = index">
+  <mat-card class="example-card">
+    <mat-card-header>
+      <!-- <div mat-card-avatar class="example-header-image"></div> -->
+
+      <!-- <img mat-card-avatar src="/assets/cart.png" alt="Avatar"> -->
+      <img mat-card-avatar src="data:image/png;base64,{{blog.img.data}}" alt="Avatar">
+      <mat-card-title>{{blog.title}}</mat-card-title>
+      <mat-card-subtitle>{{blog.name}} <span style="padding-left: 21px">{{blog.published | date:fullDate}}</span>
+      </mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+
+        {{blog.contents}}
+      </p>
+    </mat-card-content>
+    <mat-card-actions>
+      <div style="display: inline-block;">
+        <p style="margin-left: 32px"><i style="color:blue;
+          padding-right: 4px;" class="far fa-thumbs-up"></i>{{blog.likes}}</p>
+        <button class="likecolor" mat-button (click)="like(blog)"><i class="far fa-thumbs-up"></i></button>
+      </div>
+
+      <div style="display: inline-block;">
+        <p style="margin-left: 32px"><i style="color:red;
+        padding-right: 4px;" class="far fa-thumbs-down"></i>{{blog.dislike}}</p>
+        <button mat-button class="dislikecolor" (click)="dislike(blog)"><i class="far fa-thumbs-down"></i></button>
+      </div>
+      <div style="display: inline-block;">
+        <button mat-button style="display: block;" class="likecolor" (click)="displayComments(blog)">comment<span
+            style="padding-left:8px;">{{blog.comments.length}}</span></button>
+        <button mat-button class="likecolor" (click)="writeComment(blog)">comment</button>
+      </div>
+      <!--form for post comment-->
+      <div style="display: inline-block;" *ngIf="blog.writecommnet">
+        <form [formGroup]="postCommentForm" (ngSubmit)="postComments(blog)">
+          <mat-card>
+            <mat-card-header>
+              <img mat-card-avatar src="data:image/png;base64,{{authorimage.img.data}}"  alt="Avatar">
+              <mat-card-subtitle>
+                <span style="font-weight: 500;color:black;">{{name}}</span>
+                <span style="padding-left: 21px">{{dateAndTime | custom}}</span>
+
+              </mat-card-subtitle>
+            </mat-card-header>
+            <mat-form-field>
+              <input matInput type="text" placeholder="post your comment" formControlName="comment">
+            </mat-form-field>
+            <button mat-raised-button type="submit" style="width: 180px" color="primary"
+              [disabled]="!postCommentForm.valid">Post</button>
+          </mat-card>
+
+
+          <!--[disabled]="!loginForm.valid"-->
+
+
+        </form>
+      </div>
+      <!-- <button mat-button (click)="dislike(blog)"><i class="far fa-thumbs-down"></i></button>
+        <span>{{blog.dislike}}</span> -->
+      <ng-container *ngIf="blog.displaycommnet">
+        <mat-card style="margin-bottom: 10px;" *ngFor="let cmnt of blog.comments">
+          <div class="container" *ngIf="cmnt.hideeditcomment">
+            <button mat-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item (click)="editComment(cmnt,blog)">
+                <mat-icon>edit</mat-icon><span>Edit</span>
+              </button>
+              <button mat-menu-item (click)="deleteComment(cmnt,blog)">
+                <mat-icon>delete</mat-icon><span>Delete</span>
+              </button>
+            </mat-menu>
+          </div>
+          <mat-card-header>
+            <!-- <img mat-card-avatar src="data:image/png;base64,{{cmnt.authorimage}}" alt="Avatar"> -->
+            
+            <ng-container *ngIf="cmnt.edit==false || true">
+              <mat-card-subtitle><span style="font-weight: 500;color:black;">{{cmnt.name}}</span><span
+                  style="padding-left: 21px">{{cmnt.createdAt | custom}}</span> </mat-card-subtitle>
+            </ng-container>
+            <!-- <ng-container *ngIf="cmnt.edit==true">
+              <mat-card-subtitle><span style="font-weight: 500;color:black;">{{cmnt.name}}</span><span
+                  style="padding-left: 21px">{{cmnt.updatedAt | custom}}</span> </mat-card-subtitle>
+            </ng-container> -->
+          </mat-card-header>
+          <mat-card-content>
+            <ng-container *ngIf="cmnt.edit==false">
+              <p> {{cmnt.comment}}</p>
+            </ng-container>
+            <ng-container *ngIf="cmnt.edit==true">
+              <mat-form-field>
+                <input matInput [(ngModel)]="cmnt.comment">
+              </mat-form-field>
+            </ng-container>
+            <span style="padding-left: 107px;"><button mat-raised-button *ngIf="cmnt.edit==true"
+                (click)="saveEditedComment(cmnt,blog)" color="accent">update comment</button></span>
+          </mat-card-content>
+        </mat-card>
+      </ng-container>
+
+    </mat-card-actions>
+
+  </mat-card>
 
 </div>

@@ -43,7 +43,7 @@ export class AddtrainingeventComponent implements OnInit {
 
   addnewtrainingform: FormGroup;
   
-  trainingcenters=['USA-AL','USA-AZ','USA-FA','USA-FL','USA-KA','USA-LA','USA-MN','USA-MS']
+  trainingcenters=['A','B','C','D','E','F','G','H']
   tableData: any = [];
   result: any;
 

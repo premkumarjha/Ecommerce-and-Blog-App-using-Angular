@@ -52,3 +52,29 @@
     /* justify-content: space-between; */
     margin-left: 12px;
 }
+
+.mat-card .example-card .mat-card p{
+  color: brown;
+}
+
+.mat-card .inline{
+  display:inline-block;
+}
+
+.likecolor:active {
+
+  color:blue;
+  
+}
+
+.dislikecolor:active{
+  color: red;
+}
+
+.containerblogtext{
+  display: flex;
+  /* //flex-direction: column; */
+  justify-content: center;
+  margin: auto;
+  margin-right: 30px;
+}

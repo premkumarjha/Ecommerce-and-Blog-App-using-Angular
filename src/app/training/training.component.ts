@@ -74,6 +74,11 @@ abc:any;
     //subscribing the event data
     this.myservice.getNavChangeEmitter().subscribe(res => {
       this.tableData = res;
+      
+      this.tableData=this.tableData.filter(data=>{
+        data.edit=false;
+        return data;
+      })
       console.log(this.tableData);
       console.log(res)
       this.dataSource = new MatTableDataSource<any>(this.tableData);
@@ -128,6 +133,10 @@ abc:any;
       this.result = res;
       //this.tableData.push(res);
       this.tableData = res;
+      this.tableData=this.tableData.filter(data=>{
+        data.edit=false;
+        return data;
+      })
 
       console.log(this.tableData);
       //console.log(this.result)
@@ -181,18 +190,25 @@ dialogRef.afterClosed().subscribe(data=>{
     })
   }
   
-  inlineEditCourseDialog(element,index){
-this.edit=true;
-this.defgh=true;
+  inlineEdit(element,index){
+//this.edit=true;
+//this.defgh=true;
+this.tableData=this.tableData.filter(data=>{
+  if(data['_id']==element._id){
+    data.edit=true;
+  }else{
+    data.edit=false;
+  }
+})
 console.log(element,index);
 this.edit=true;
 
 this.idforinlineedit=index;
   }
   
-  inlineSaveCourseDialog(element){
+  inlineSave(element){
 
- this.edit=false;
+ //this.edit=false;
 
     //console.log(this.defgh)
     this.idforinlineedit=element._id;

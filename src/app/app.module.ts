@@ -59,7 +59,7 @@ import { FailureComponent } from './failure/failure.component';
 //import { FormsModule } from '@angular/forms';
 import { AuthModule } from '@auth0/auth0-angular';
 import { PassportloginComponent } from './passportlogin/passportlogin.component';
-import { SquarePipe } from './square.pipe';
+import { customPipe } from './custom.pipe';
 import { PracticeDirective } from './practice.directive';
 //import { TokenInterceptor } from'../app/token.interceptor'
 import {MatSnackBarModule} from '@angular/material/snack-bar';
@@ -75,7 +75,7 @@ import { BlogComponent } from './blog/blog.component';
 import { BlogAuthorComponent } from './addblog/blog-author.component';
 import { BlogLoginComponent } from './blog-author-login/blog-login.component';
 import { AuthorComponent } from './author/author.component';
-
+//import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [
@@ -110,7 +110,7 @@ import { AuthorComponent } from './author/author.component';
     SuccessComponent,
     FailureComponent,
     PassportloginComponent,
-    SquarePipe,
+    customPipe,
     PracticeDirective,
     NgrxComponent,
     PracticeComponent,
@@ -155,6 +155,7 @@ import { AuthorComponent } from './author/author.component';
      MatBadgeModule,
      //AuthModule,
      MatSnackBarModule,
+     FlexLayoutModule ,
      
      AuthModule.forRoot({
       domain: 'dev-zh9gbzcl.us.auth0.com',

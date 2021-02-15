@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MyserviceService } from '../myservice.service';
@@ -13,23 +14,50 @@ export class AuthorComponent implements OnInit {
   authorid:any;
   edit:Boolean=false;
   editpostdata:any;
-  displayeditdata:any={
-    edit:false
-  }
-  constructor(private router: Router,public myservice: MyserviceService,private _snackBar: MatSnackBar,private activatedRoute: ActivatedRoute) {
+  isLike:Boolean=false;
+  isDislike: boolean=false;
+  writecomment:Boolean=false;
+  displaypost: boolean=false;
+  postCommentForm: FormGroup;
+  name: string;
+  dateAndTime;
+  hideeditcomment:Boolean;
+  authorimage: any;
+  constructor(private router: Router,public myservice: MyserviceService,private _snackBar: MatSnackBar,private activatedRoute: ActivatedRoute,private fb: FormBuilder) {
     
    }
 
   ngOnInit(): void {
-    this.loadAuthorPost();
+    this.authorid=localStorage.getItem("authorid");
+    if(this.authorid==undefined){
+      this.router.navigate(['/authorlogin']);
+    }else{
+      this.loadAuthorPost();
     console.log(this.authorid);
     this.activatedRoute.paramMap.subscribe(
       data=>{
         console.log(data)
       }
      );
-  }
 
+     this.authorid=localStorage.getItem("authorid");
+      if(this.authorid !==undefined){
+        this.isLike=true;
+        this.isDislike=true;
+      }
+    }
+    //comment section
+    this.dateAndTime=new Date(); 
+    this.name=localStorage.getItem('name');
+    this.postCommentForm = this.fb.group({
+      comment: ['', Validators.required],
+      //password: ['', Validators.required],
+      name:[this.name],
+      createdAt:[this.dateAndTime]
+    });
+   
+  }
+  
   loadAuthorPost(){
     console.log(this.authorid);
     
@@ -42,6 +70,41 @@ export class AuthorComponent implements OnInit {
     //this.myservice.authorData=posts;
    //this.postdata=posts;
    this.blogData=posts;
+//to hide edit button in comment
+  //  this.blogData.filter(data1=>{
+
+  //   data1.comments.filter(data=>{
+    
+  //   if(data.name==data1.name){
+  //   this.hideeditcomment=true;
+  //   }else{
+  //     this.hideeditcomment=false;
+  //   }
+  //   })
+  //   })
+  this.authorimage=this.blogData.find(data=>data.name==this.name);
+ // console.log(this.authorimage)
+   this.blogData['displaycommnet']=false;
+  this.blogData['writecomment']=false;
+  this.blogData.forEach(element => {
+
+    element.comments.filter(data=>{
+      data.edit=false;
+      data.hideeditcomment=false;
+      console.log("helooooooooooooooooo:",data)
+      if(data.name ==localStorage.getItem('name')){
+        data.hideeditcomment=true;
+      }else{
+        this.hideeditcomment=false;
+      }
+    })
+  })
+
+   console.log(this.blogData);
+  this.blogData= this.blogData.filter(data=>{
+     data.edit=false;
+     return data;
+   })
    console.log(this.blogData)
 
     },
@@ -116,11 +179,21 @@ editpost(editpost){
 //editpost['edit']=true;
 this.edit=true;
 this.editpostdata=editpost;
-this.displayeditdata=this.blogData.filter(data=>data['_id']==editpost['_id']);
+this.blogData=this.blogData.filter(data=>{
+  if(data['_id']==editpost['_id']){
+data.edit=true;
+  }else{
+    data.edit=false;
+  }
+  return data;
+
 //this.displayeditdata=
 //this.displayeditdata['edit']=true;
-console.log(this.displayeditdata)
+
+})
+console.log(this.blogData)
 }
+
 deletepost(deletedata){
   console.log(deletedata);
   const url = "http://localhost:3000/course/delete/";
@@ -143,6 +216,7 @@ updatepost(data){
   const url = "http://localhost:3000/course/edit/";
 this.myservice.editauthorpost(url + data._id, data).subscribe(data1=>{
 console.log(data);
+console.log("in update method",data)
 this.loadAuthorPost();
 },
 error=>{
@@ -153,4 +227,59 @@ error=>{
 })
   
 }
+
+writeComment(blg){
+  console.log(blg);
+  this.dateAndTime=new Date(); 
+  blg['writecommnet']=!blg['writecommnet'];
+  
+//this.writecomment=!this.writecomment;
+}
+displayComments(blg){
+  blg['displaycommnet']=!blg['displaycommnet'];
+this.displaypost=!this.displaypost;
+}
+//const url = "http://localhost:3000/course/getauthor"
+postComments(blog){
+ // this.dateAndTime=new Date(); 
+  this.name=localStorage.getItem('name');
+  const url = "http://localhost:3000/course/postcomments/";
+  console.log(blog);
+  console.log(this.postCommentForm.value);
+  this.myservice.postsComments(url + blog._id,this.postCommentForm.value).subscribe(data=>{
+    console.log("commment:",data);
+    console.log(data)
+  
+    this.postCommentForm.reset();
+   // this.writecomment=false;
+    this.loadAuthorPost();
+  })
+  }
+
+  editComment(cmnt,blg){
+    this.dateAndTime=new Date(); 
+    cmnt['edit']=true;
+  console.log(cmnt,blg);
+  
+
+  }
+saveEditedComment(cmnt,blg){
+  console.log(cmnt,blg); 
+  const url="http://localhost:3000/course/editcomment/"
+  cmnt.createdAt=new Date();
+  this.myservice.editComment(url + blg._id,cmnt).subscribe(data=>{
+    console.log("edited comment:",data);
+    this.loadAuthorPost();
+  })
+}
+  deleteComment(cmnt,blg){
+    console.log(cmnt,blg)
+    //deletecomment
+    let commentid={"_id":cmnt._id};
+    const url="http://localhost:3000/course/deletecomment/"
+    this.myservice.deleteComment(url + blg._id,cmnt).subscribe(data=>{
+      console.log("deleted comment:",data);
+      this.loadAuthorPost();
+    })
+  }
 }

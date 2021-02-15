@@ -1,4 +1,26 @@
-<mat-toolbar color="primary" >
+
+<div class="flex-container " fxLayout="row">
+  <mat-toolbar color="primary">
+    <div class="containerblogtext" fxFlex>Blog App</div>
+    <div fxFlex></div>
+    <div class=" container" fxFlex><button mat-raised-button color="accent" (click)="authorLogin()">LOGIN</button>
+      <button mat-raised-button color="accent" *ngIf="!myservice.isSignup" (click)="authorSignup()">SIGN UP</button>
+      <button mat-raised-button color="accent" (click)="addpost()">Add Post</button> 
+      
+      <button mat-button [matMenuTriggerFor]="menu" >
+          <mat-icon>exit_to_app</mat-icon>
+      </button>
+    
+      <mat-menu #menu="matMenu">
+          <button mat-menu-item (click)="logout()">Logout</button>
+    
+      </mat-menu>
+    </div>
+  </mat-toolbar>
+</div>
+
+<!--Below code is without flex layout-->
+<!-- <mat-toolbar color="primary" >
   <span style="padding-left: 227px;">My Blog</span>
     <div class="container" >
       
@@ -16,7 +38,7 @@
       </mat-menu>
     </div>
   
-</mat-toolbar>
+</mat-toolbar> -->
 
 <div class="centerFlex">
     <mat-card >
@@ -49,21 +71,13 @@
         >
         </mat-form-field>
         <br>
-        <!-- <a style="color: blue;padding-left: 277px" [routerLink]="'/reset'">Forgot Password?</a><br> -->
-
-        <!-- <mat-form-field style="width: 400px;padding-bottom: 16px">
-            <mat-label>Password</mat-label>
-            <input matInput type="password" autocomplete="off" formControlName="password" />
-          
-          </mat-form-field> -->
+       
           <br>
           <div style="display: inline-block;padding-right: 10px;">
             <!--[disabled]="!loginForm.valid"-->
           <button mat-raised-button type="submit"  style="width: 180px" color="primary" [disabled]="!signupBlogForm.valid" >signup</button>
           </div>
-          <!-- <div style="display: inline-block;">
-          <button mat-raised-button type="button" (click)="signup()" style="width: 210px"  color="primary" >signup</button>
-        </div> -->
+          
         </form>
     </mat-card-content>
     </mat-card>

@@ -404,20 +404,21 @@ getNgrxData() {
 }
 
 bloggerlogin(url,body){
-  return this.http.post(url, body, { headers: this.headers })
+  return this.http.post(url, body, { headers: this.headers });
   
 }
 bloggerSignup(url,body){
-  return this.http.post(url, body, { headers: this.headers })
-  
+  return this.http.post(url, body, { headers: this.headers });
+
 }
 eachAuthorData(url){
   return this.http.get(url);
 
 }
 addBlog(url,body){
-  return this.http.post(url, body, { headers: this.headers })
-  
+  //multipart/form-data
+  console.log(body)
+  return this.http.post(url, body);
 }
 
 getBlog(url){
@@ -431,5 +432,24 @@ deletepost(url){
 }
 editauthorpost(url,body){
   return this.http.put(url, body, { headers: this.headers });
+}
+postsComments(url,body){
+  return this.http.post(url, body, { headers: this.headers })
+
+}
+editComment(url,body){
+  
+  return this.http.put(url, body, { headers: this.headers })
+}
+deleteComment(url,body){
+  const options = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    }),
+    body: body,
+  };
+  
+    return this.http.delete(url,options);
+  
 }
 }
