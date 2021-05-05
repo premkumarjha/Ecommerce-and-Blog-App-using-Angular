@@ -38,9 +38,9 @@ export const MY_FORMATS = {
 })
 export class AddtrainingcourseComponent implements OnInit {
 
-  subjectList=['ACE Basics','ACE English','ACE Reading','ACE Writing','ACE Maths','ACE Science','ACE Basics -STEM','ACE Basics -ELA'];
+  subjectList=[' Basics',' English',' Reading',' Writing',' Maths',' Science',' Basics -',' Basics'];
 
-  trainingcenters=['USA-AL','USA-AZ','USA-FA','USA-FL','USA-KA','USA-LA','USA-MN','USA-MS'];
+  trainingcenters=['fhfxj','hhth','etryut','uoii,om','awrwate','wertr','wetyw','tuuiiyr'];
   products:any;
   addNewCourseform: FormGroup;
     data:any;

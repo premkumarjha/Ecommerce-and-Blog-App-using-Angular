@@ -43,7 +43,7 @@ export class EdittrainingcourseComponent implements OnInit {
 
   addnewtrainingform: FormGroup;
 
-  trainingcenters = ['USA-AL', 'USA-AZ', 'USA-FA', 'USA-FL', 'USA-KA', 'USA-LA', 'USA-MN', 'USA-MS']
+  trainingcenters = ['rytyt', 'tytrut', 'zsfcv', 'uioyuouo', 'wertry', 'wrtr', 'ewtrety', 'tioirtyuut']
   //data:any;
   result: any;
   _id: any;

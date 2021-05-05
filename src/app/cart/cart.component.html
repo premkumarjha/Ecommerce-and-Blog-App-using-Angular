@@ -34,7 +34,7 @@
 <button style="position: absolute;
 left: 642px;
 bottom: 46px;
-width: 124px;" mat-raised-button color="primary" (click)="checkout()">Checkout</button>
+width: 124px;" mat-raised-button color="primary" [disabled]="!checkoutbutton" (click)="checkout()">Checkout</button>
   
   </mat-card>
 </div>

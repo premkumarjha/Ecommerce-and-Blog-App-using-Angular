@@ -62,7 +62,7 @@
         
               <div style="display: inline-block;padding-left: 28px;">
                 <!--[disabled]="!loginForm.valid"-->
-              <button mat-raised-button type="submit"  style="width: 180px" color="primary" >Confirm and Place Order</button>
+              <button mat-raised-button type="submit" [disabled]="!billinForm.valid" style="width: 180px" color="primary" >Confirm and Place Order</button>
               </div>
               <div style="display: inline-block;padding-left: 52px;">
               <button mat-raised-button type="button" (click)="continueShopping()" style="width: 210px"  color="primary" >continue shopping</button>

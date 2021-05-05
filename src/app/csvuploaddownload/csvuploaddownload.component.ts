@@ -248,7 +248,12 @@ downloadImage(){
   // console.log(body.get("name"))
   this.myservice.sendProduct(url,body).subscribe(data=>{
    
-    console.log(data)
+    console.log(data);
+    this.images="",
+    this.imagename="",
+    this.priceBeforeDiscount="",
+    this.priceAfterDiscount="",
+    this.date=""
   })
   }
   

@@ -81,10 +81,10 @@
     position: relative;
     padding: 16px;
     border-radius: 4px;
-    margin-top: 99px;
+    margin-top: 20px;
     height: 265px;
     margin-left: 58px;
-    margin-right: 58px;
+    margin-right: 58px;margin-bottom: 20px;
 }
 
 .mat-card .bottom{

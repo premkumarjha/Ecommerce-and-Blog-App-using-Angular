@@ -91,19 +91,19 @@ export interface PeriodicElement {
   status:string;
 }
 const Data:any[]=[
-  {trainingevent:"ACT Certified Educator Training-Kansas City"},
-{trainingevent:"new test 1522"},
-{trainingevent:"Delivery deletion test event(B2C)"},
-{trainingevent:"BAtest"},
-{trainingevent:"ACE Online Courses August"},
-{trainingevent:"Date02 July B2C Event"},
-{trainingevent:"Date28 July B2C Event"},
+  {trainingevent:"dfghf"},
+{trainingevent:"fdhfjgmhg"},
+{trainingevent:"dfhfjgk"},
+{trainingevent:"dfhfkk"},
+{trainingevent:"dhfjjkky"},
+{trainingevent:"dryduti"},
+{trainingevent:"ryriuyo"},
 
 {trainingevent:"AUGTes"},
-{trainingevent:"ACE SCIENCE QT - Invitation Only - Group Code Required"},
+{trainingevent:"rtutiyuiu"},
 {trainingevent:"FruiTest"},
-{trainingevent:"Date02 July B2C Event"},
-{trainingevent:"Date28 July B2C Event"},
+{trainingevent:"eryyttu July rtuiot2C Event"},
+{trainingevent:"tyiyup "},
 
 ];
 

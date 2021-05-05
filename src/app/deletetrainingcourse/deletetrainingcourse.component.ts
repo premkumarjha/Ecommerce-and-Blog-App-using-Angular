@@ -43,7 +43,7 @@ export class DeletetrainingcourseComponent implements OnInit {
   array: any = { id: "", data: "" }
   addnewtrainingform: FormGroup;
 
-  trainingcenters = ['USA-AL', 'USA-AZ', 'USA-FA', 'USA-FL', 'USA-KA', 'USA-LA', 'USA-MN', 'USA-MS']
+  trainingcenters = ['hdh', 'hgrthtrht-AZ', 'ertytr', 'ertsyty', 'ryryt', 'rtyuyt', 'tyuuy', 'ryuy']
 
 
   constructor(private fb: FormBuilder, private myservice: MyserviceService, public dialog: MatDialog) {

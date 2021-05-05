@@ -10,6 +10,7 @@ import { MyserviceService } from '../myservice.service';
 export class CartComponent implements OnInit {
 
   @Input() cartsData: any
+  checkoutbutton=false;
   //price: number;
   //counter=0;
   constructor(public myservice: MyserviceService, private router: Router) { }
@@ -19,7 +20,9 @@ export class CartComponent implements OnInit {
     let price = 0;
     console.log(this.cartsData)
     console.log(this.myservice.cartArray);
-
+if(this.myservice.cartArray.length>0){
+  this.checkoutbutton=true;
+}
     //     this.myservice.cartArray.forEach(data=>{
     // length+=data.count;
     //       //this.myservice.emitcartcountd(length);
